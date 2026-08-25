@@ -34,6 +34,7 @@ export {
   validateSelectionAssessment,
   validateSelectionSignals,
 } from "./scripts/selection-assessment.mjs";
+export { validateContract } from "./scripts/contracts.mjs";
 export { AGENT_SOURCE_PATHS, buildAgents, renderAgent } from "./scripts/build-agents.mjs";
 
 export const packageRoot = dirname(fileURLToPath(import.meta.url));

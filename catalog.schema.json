@@ -53,11 +53,13 @@
     "contract":{
       "type":"object",
       "additionalProperties":false,
-      "required":["id","schema","fixtures"],
+      "required":["id","schema","schemaScope","fixtures","validator"],
       "properties":{
         "id":{"$ref":"#/$defs/id"},
         "schema":{"$ref":"#/$defs/path"},
-        "fixtures":{"$ref":"#/$defs/path"}
+        "schemaScope":{"const":"structural"},
+        "fixtures":{"$ref":"#/$defs/path"},
+        "validator":{"const":"validateContract"}
       }
     }
   }

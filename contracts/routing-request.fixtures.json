@@ -80,6 +80,7 @@
   "invalid": [
     {
       "name": "template override missing reason",
+      "schemaInvalid": true,
       "errorContains": "overrideReason",
       "request": {
         "role": "integrator", "taskGrade": "senior", "domainRequirements": [],
@@ -89,7 +90,8 @@
     },
     {
       "name": "unchanged template carries a fake reason",
-      "errorContains": "must omit composition.overrideReason",
+      "schemaInvalid": true,
+      "errorContains": "structurally invalid",
       "request": {
         "role": "integrator", "taskGrade": "senior", "domainRequirements": [],
         "topology": "worker", "tier": "senior", "reasoning": "high", "posture": "deliver",
@@ -112,6 +114,7 @@
     },
     {
       "name": "bespoke missing authority contract",
+      "schemaInvalid": true,
       "errorContains": "contract",
       "request": {
         "role": "migration-forensics", "taskGrade": "senior", "domainRequirements": [],
@@ -124,6 +127,7 @@
     },
     {
       "name": "bespoke promotion decision omitted",
+      "schemaInvalid": true,
       "errorContains": "promotionCandidate",
       "request": {
         "role": "migration-forensics", "taskGrade": "senior", "domainRequirements": [],
@@ -165,6 +169,96 @@
             "capabilities": ["filesystem.read", "coordination"],
             "mayDecide": ["read-only probes"], "mustEscalate": ["writes"],
             "doneWhen": ["timeline sourced"], "report": "timeline and gaps"
+          }
+        }
+      }
+    },
+    {
+      "name": "template composition id differs from role",
+      "errorContains": "composition.id must match canonical role integrator",
+      "request": {
+        "role": "integrator", "taskGrade": "senior", "domainRequirements": [],
+        "topology": "worker", "tier": "senior", "reasoning": "high", "posture": "deliver",
+        "composition": { "kind": "template", "id": "executor", "overrides": [] }
+      }
+    },
+    {
+      "name": "unknown role cannot claim a stock template",
+      "errorContains": "unknown role migration-author requires a bespoke composition",
+      "request": {
+        "role": "migration-author", "taskGrade": "senior", "domainRequirements": [],
+        "topology": "worker", "tier": "senior", "reasoning": "high", "posture": "deliver",
+        "composition": { "kind": "template", "id": "migration-author", "overrides": [] }
+      }
+    },
+    {
+      "name": "bespoke nearest template must be canonical stock",
+      "errorContains": "nearestTemplate must name a canonical stock template",
+      "request": {
+        "role": "migration-author", "taskGrade": "senior", "domainRequirements": [],
+        "topology": "worker", "tier": "senior", "reasoning": "high", "posture": "deliver",
+        "composition": {
+          "kind": "bespoke", "id": "migration-author", "nearestTemplate": "missing-template",
+          "bespokeReason": "specialized migration boundary", "promotionCandidate": false,
+          "contract": {
+            "responsibility": "author a migration", "deliverable": "a checked migration",
+            "capabilities": ["filesystem.read", "filesystem.search", "shell.readonly"],
+            "mayDecide": ["implementation details"], "mustEscalate": ["contract changes"],
+            "doneWhen": ["the named check passes"], "report": "change and evidence"
+          }
+        }
+      }
+    },
+    {
+      "name": "bespoke orchestrator requires coordination",
+      "errorContains": "orchestrator topology requires coordination",
+      "request": {
+        "role": "migration-director", "taskGrade": "staff", "domainRequirements": [],
+        "topology": "orchestrator", "tier": "frontier", "reasoning": "xhigh", "posture": "deliver",
+        "composition": {
+          "kind": "bespoke", "id": "migration-director",
+          "bespokeReason": "specialized migration coordination", "promotionCandidate": false,
+          "contract": {
+            "responsibility": "coordinate migrations", "deliverable": "an integrated migration",
+            "capabilities": ["filesystem.read", "filesystem.search", "shell.readonly"],
+            "mayDecide": ["work allocation"], "mustEscalate": ["contract changes"],
+            "doneWhen": ["all migrations integrate"], "report": "outcome and evidence"
+          }
+        }
+      }
+    },
+    {
+      "name": "preserve posture forbids authoring capabilities",
+      "errorContains": "preserve posture requires a non-authoring capability boundary",
+      "request": {
+        "role": "migration-preserver", "taskGrade": "senior", "domainRequirements": [],
+        "topology": "worker", "tier": "senior", "reasoning": "high", "posture": "preserve",
+        "composition": {
+          "kind": "bespoke", "id": "migration-preserver",
+          "bespokeReason": "preserve migration evidence", "promotionCandidate": false,
+          "contract": {
+            "responsibility": "preserve migrations", "deliverable": "a preservation verdict",
+            "capabilities": ["filesystem.read", "filesystem.search", "filesystem.write", "shell"],
+            "mayDecide": ["inspection details"], "mustEscalate": ["contract changes"],
+            "doneWhen": ["the verdict is supported"], "report": "verdict and evidence"
+          }
+        }
+      }
+    },
+    {
+      "name": "prune posture requires authoring capabilities",
+      "errorContains": "prune posture requires filesystem.write and shell capabilities",
+      "request": {
+        "role": "migration-pruner", "taskGrade": "senior", "domainRequirements": [],
+        "topology": "worker", "tier": "senior", "reasoning": "high", "posture": "prune",
+        "composition": {
+          "kind": "bespoke", "id": "migration-pruner",
+          "bespokeReason": "remove obsolete migrations", "promotionCandidate": false,
+          "contract": {
+            "responsibility": "prune migrations", "deliverable": "a minimal migration set",
+            "capabilities": ["filesystem.read", "filesystem.search", "shell.readonly"],
+            "mayDecide": ["obsolete entries"], "mustEscalate": ["contract changes"],
+            "doneWhen": ["obsolete entries are identified"], "report": "change and evidence"
           }
         }
       }

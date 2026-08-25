@@ -107,5 +107,6 @@ Every run carries exactly eight routing fields:
 
 Provider, model, account, allocation, dispatch syntax, runtime identity, and
 coordination state are consumer-owned execution facts, never routing fields.
-The schemas and validators under `contracts/` and `scripts/` are the
-machine contract.
+The raw JSON Schemas classify structural shape only. The `validateContract`
+export advertised by `catalog.json` composes that structural check with the
+package's semantic validator and is the normative machine contract.

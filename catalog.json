@@ -41,7 +41,8 @@
     {"id":"staffing-catalog-schema","type":"catalog","path":"staffing/catalog.schema.json"}
   ],
   "contracts": [
-    {"id":"routing-request-v2","schema":"contracts/routing-request.schema.json","fixtures":"contracts/routing-request.fixtures.json"},
-    {"id":"minimum-sufficient-v1","schema":"contracts/selection-assessment.schema.json","fixtures":"contracts/selection-assessment.fixtures.json"}
+    {"id":"routing-request-v2","schema":"contracts/routing-request.schema.json","schemaScope":"structural","fixtures":"contracts/routing-request.fixtures.json","validator":"validateContract"},
+    {"id":"minimum-sufficient-v1","schema":"contracts/selection-assessment.schema.json","schemaScope":"structural","fixtures":"contracts/selection-assessment.fixtures.json","validator":"validateContract"},
+    {"id":"staffing-catalog-v2","schema":"staffing/catalog.schema.json","schemaScope":"structural","fixtures":"staffing/catalog.fixtures.json","validator":"validateContract"}
   ]
 }

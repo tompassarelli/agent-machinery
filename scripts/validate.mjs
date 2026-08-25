@@ -102,6 +102,8 @@ export function validatePackage({ checkGenerated = true } = {}) {
   assert(schemaIds.has(catalog.$schema), `catalog $schema is absent from declared schema assets`);
   for (const contract of catalog.contracts) {
     assert(schemaPaths.has(contract.schema), `contract ${contract.id} schema is absent from catalog`);
+    assert(contract.schemaScope === "structural", `contract ${contract.id} must classify its raw schema as structural`);
+    assert(contract.validator === "validateContract", `contract ${contract.id} must use the composed validator`);
     assert(existsSync(containedPath(contract.fixtures, `contract ${contract.id} fixtures`)), `missing fixtures for ${contract.id}`);
   }
   for (const input of AGENT_SOURCE_PATHS)

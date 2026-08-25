@@ -155,6 +155,7 @@
     },
     {
       "name": "max missing concrete justification",
+      "schemaInvalid": true,
       "errorContains": "exceptionalDeliberation",
       "assessment": {
         "version": "minimum-sufficient-v1",
@@ -173,7 +174,8 @@
     },
     {
       "name": "non-max route carries stale exceptional detail",
-      "errorContains": "below max must omit exceptionalDeliberation",
+      "schemaInvalid": true,
+      "errorContains": "structurally invalid",
       "assessment": {
         "version": "minimum-sufficient-v1",
         "signals": {

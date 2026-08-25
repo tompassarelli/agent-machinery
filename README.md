@@ -17,6 +17,8 @@ its own adapters and enforcement.
   stock compositions.
 - `contracts/` holds the stable eight-field routing request and
   minimum-sufficient selection sidecar.
+- Raw JSON Schemas check structure only; the catalog-advertised
+  `validateContract` export performs required structural and semantic checks.
 - `docs/` holds the source blocks used by `scripts/build-agents.mjs`.
 - `agents/` is generated provider-neutral template output.
 - `staffing/SKILL.md` and `skills/*/SKILL.md` are standard skills.

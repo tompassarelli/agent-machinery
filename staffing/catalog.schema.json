@@ -2,9 +2,10 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:agent-machinery:schema:staffing-catalog:v2",
   "title": "Orchestration staffing catalog",
+  "description": "Structural shape only. Use the catalog-advertised validateContract export for normative structural and semantic validation.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["version", "vocabulary", "defaults", "presets"],
+  "required": ["$schema", "version", "vocabulary", "defaults", "presets"],
   "properties": {
     "$schema": { "const": "urn:agent-machinery:schema:staffing-catalog:v2" },
     "version": { "const": 2 },
@@ -18,7 +19,7 @@
         "deliberations": { "$ref": "#/$defs/uniqueStrings" },
         "topologies": { "$ref": "#/$defs/uniqueStrings" },
         "postures": { "$ref": "#/$defs/uniqueStrings" },
-        "capabilities": { "$ref": "#/$defs/capabilities" }
+        "capabilities": { "$ref": "#/$defs/uniqueStrings" }
       }
     },
     "defaults": {
