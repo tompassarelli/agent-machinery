@@ -15,7 +15,7 @@ test("forbidden provider brands match as real words", () => {
 
 test("export manifest is a closed provider-neutral package", () => {
   const result = validatePackage();
-  assert.equal(result.units, 17);
+  assert.equal(result.units, 31);
   assert.equal(result.templates, 16);
 });
 

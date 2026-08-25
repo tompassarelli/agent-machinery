@@ -35,8 +35,8 @@ test("catalog assets and contracts bind stable versioned IDs to shipped schemas"
     catalog.units.filter(({ kind }) => kind === "module").map(({ id, members }) => [id, members]),
     [
       ["agent-machinery", ["orchestration", "agent-practice"]],
-      ["orchestration", ["staffing", "compose"]],
-      ["agent-practice", ["build-vs-reuse", "external-code", "greenfield", "planning", "prior-art", "production-hardening", "program-craftsmanship", "program-stewardship", "rust-development", "skill-maintenance", "terse", "verification"]],
+      ["orchestration", ["staffing-distilled", "compose-distilled"]],
+      ["agent-practice", ["build-vs-reuse-distilled", "external-code-distilled", "greenfield-distilled", "planning-distilled", "prior-art-distilled", "production-hardening-distilled", "program-craftsmanship-distilled", "program-stewardship-distilled", "rust-development-distilled", "skill-maintenance-distilled", "terse-distilled", "verification-distilled"]],
     ],
   );
   for (const id of expected) {
