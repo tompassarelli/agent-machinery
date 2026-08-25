@@ -80,7 +80,6 @@
   "invalid": [
     {
       "name": "template override missing reason",
-      "schemaInvalid": true,
       "errorContains": "overrideReason",
       "request": {
         "role": "integrator", "taskGrade": "senior", "domainRequirements": [],
@@ -90,8 +89,7 @@
     },
     {
       "name": "unchanged template carries a fake reason",
-      "schemaInvalid": true,
-      "errorContains": "structurally invalid",
+      "errorContains": "must omit composition.overrideReason",
       "request": {
         "role": "integrator", "taskGrade": "senior", "domainRequirements": [],
         "topology": "worker", "tier": "senior", "reasoning": "high", "posture": "deliver",
@@ -259,6 +257,42 @@
             "capabilities": ["filesystem.read", "filesystem.search", "shell.readonly"],
             "mayDecide": ["obsolete entries"], "mustEscalate": ["contract changes"],
             "doneWhen": ["obsolete entries are identified"], "report": "change and evidence"
+          }
+        }
+      }
+    },
+    {
+      "name": "bespoke capability list omits implied write authority",
+      "errorContains": "capability list is not closed; missing implied filesystem.write",
+      "request": {
+        "role": "migration-author", "taskGrade": "senior", "domainRequirements": [],
+        "topology": "worker", "tier": "senior", "reasoning": "high", "posture": "deliver",
+        "composition": {
+          "kind": "bespoke", "id": "migration-author",
+          "bespokeReason": "specialized migration boundary", "promotionCandidate": false,
+          "contract": {
+            "responsibility": "author a migration", "deliverable": "a checked migration",
+            "capabilities": ["filesystem.read", "filesystem.search", "shell"],
+            "mayDecide": ["implementation details"], "mustEscalate": ["contract changes"],
+            "doneWhen": ["the named check passes"], "report": "change and evidence"
+          }
+        }
+      }
+    },
+    {
+      "name": "bespoke orchestrator forbids write authority",
+      "errorContains": "orchestrator topology forbids filesystem.write capability",
+      "request": {
+        "role": "migration-director", "taskGrade": "staff", "domainRequirements": [],
+        "topology": "orchestrator", "tier": "frontier", "reasoning": "xhigh", "posture": "deliver",
+        "composition": {
+          "kind": "bespoke", "id": "migration-director",
+          "bespokeReason": "specialized migration coordination", "promotionCandidate": false,
+          "contract": {
+            "responsibility": "coordinate migrations", "deliverable": "an integrated migration",
+            "capabilities": ["filesystem.read", "filesystem.search", "filesystem.write", "shell", "coordination"],
+            "mayDecide": ["work allocation"], "mustEscalate": ["contract changes"],
+            "doneWhen": ["all migrations integrate"], "report": "outcome and evidence"
           }
         }
       }

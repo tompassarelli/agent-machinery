@@ -82,11 +82,19 @@
       ]
     },
     {
-      "name": "shell capability omits implied write authority", "schemaInvalid": true,
-      "errorContains": "structurally invalid",
+      "name": "shell capability omits implied write authority",
+      "errorContains": "capability list is not closed; missing implied filesystem.write",
       "operations": [{
         "op": "set", "path": ["presets", 0, "capabilities"],
         "value": ["filesystem.read", "filesystem.search", "shell"]
+      }]
+    },
+    {
+      "name": "shell capability conflicts with readonly shell",
+      "errorContains": "shell and shell.readonly are mutually exclusive",
+      "operations": [{
+        "op": "set", "path": ["presets", 0, "capabilities"],
+        "value": ["filesystem.read", "filesystem.search", "filesystem.write", "shell", "shell.readonly"]
       }]
     }
   ]

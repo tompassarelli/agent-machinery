@@ -155,7 +155,6 @@
     },
     {
       "name": "max missing concrete justification",
-      "schemaInvalid": true,
       "errorContains": "exceptionalDeliberation",
       "assessment": {
         "version": "minimum-sufficient-v1",
@@ -174,8 +173,7 @@
     },
     {
       "name": "non-max route carries stale exceptional detail",
-      "schemaInvalid": true,
-      "errorContains": "structurally invalid",
+      "errorContains": "below max must omit exceptionalDeliberation",
       "assessment": {
         "version": "minimum-sufficient-v1",
         "signals": {
@@ -209,6 +207,24 @@
         },
         "selected": { "tier": "standard", "reasoning": "medium" },
         "exception": { "code": "unmodeled-risk", "detail": "stale exception from a previous route" }
+      }
+    },
+    {
+      "name": "selected route omits reasoning", "schemaInvalid": true,
+      "errorContains": "structurally invalid",
+      "assessment": {
+        "version": "minimum-sufficient-v1",
+        "signals": {
+          "decisionOwnership": "bounded", "seamScope": "established",
+          "errorExposure": "contained-reversible", "oracleStrength": "objective-end-to-end",
+          "foundationalImpact": "none", "dependencyShape": "atomic-cohesive",
+          "reasoningShape": "bounded-branching"
+        },
+        "derived": {
+          "minimumTier": "standard", "minimumReasoning": "medium",
+          "ruleCodes": ["decision-ownership:bounded", "seam-scope:established", "reasoning-shape:bounded-branching"]
+        },
+        "selected": { "tier": "standard" }
       }
     }
   ]

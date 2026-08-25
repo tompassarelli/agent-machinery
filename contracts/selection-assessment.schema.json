@@ -59,40 +59,5 @@
   "$defs": {
     "tier": { "enum": ["economy", "standard", "senior", "frontier"] },
     "reasoning": { "enum": ["low", "medium", "high", "xhigh", "max"] }
-  },
-  "allOf": [
-    {
-      "if": {
-        "properties": {
-          "selected": {
-            "type": "object",
-            "properties": { "reasoning": { "const": "max" } },
-            "required": ["reasoning"]
-          }
-        },
-        "required": ["selected"]
-      },
-      "then": {
-        "type": "object",
-        "required": ["exceptionalDeliberation"],
-        "properties": {
-          "exceptionalDeliberation": { "type": "string", "minLength": 1 },
-          "signals": {
-            "type": "object",
-            "properties": { "reasoningShape": { "const": "exceptional" } },
-            "required": ["reasoningShape"]
-          }
-        }
-      },
-      "else": {
-        "not": {
-          "type": "object",
-          "properties": {
-            "exceptionalDeliberation": { "type": "string", "minLength": 1 }
-          },
-          "required": ["exceptionalDeliberation"]
-        }
-      }
-    }
-  ]
+  }
 }
