@@ -18,8 +18,8 @@ frameworks and degraded public vocabulary/errors. Separate broad restructuring.
 Record consequential deferrals only in the existing mechanism, with reason and
 reopening event.
 
-Route structure to `program-craftsmanship`, guarantees to
-`production-hardening`; use `planning`/`verification` as applicable. Invent no
+Route structure to `program-craftsmanship-distilled`, guarantees to
+`production-hardening-distilled`; use `planning-distilled`/`verification-distilled` as applicable. Invent no
 recurring review, sidecar, or global ledger without its own objective/authority.
 Stop at the floor when more is speculative, out of scope, or poor value.
 

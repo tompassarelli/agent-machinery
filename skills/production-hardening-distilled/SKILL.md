@@ -15,11 +15,11 @@ diagnostics.
 
 Fix the weakest link minimally; preserve recovery and safe missing-config
 behavior. Bound retries with timeout and suitable idempotence/deduplication. Use
-`planning` before public/durable contract, security/concurrency, compatibility,
+`planning-distilled` before public/durable contract, security/concurrency, compatibility,
 or rollout changes. This grants no credentials, deployment, production writes,
 or outside contact.
 
-Use nearest failure-exposing `verification`; happy path is not resilience.
+Use nearest failure-exposing `verification-distilled`; happy path is not resilience.
 Report guarantee, scenario, containment, assumptions, and risk. Stop when proved
 or blocked on authority/design.
 

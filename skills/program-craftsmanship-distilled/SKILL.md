@@ -9,13 +9,13 @@ description: >-
 # Program craftsmanship
 
 Bound behavior, callers, authority/projections, and public/durable surfaces.
-Read governing policy/history and choose existing `verification`; without a
+Read governing policy/history and choose existing `verification-distilled`; without a
 credible comparison, make only mechanical changes or stop.
 
 Fix current friction minimally, with coverage for non-mechanical reshaping.
 Separate unrelated fixes; reject speculative generality. Never call API, stored
 data, security, concurrency, compatibility, or deployment changes cleanup—use
-`planning` or `production-hardening`.
+`planning-distilled` or `production-hardening-distilled`.
 
 Edit authority, never generated/vendor projections; regenerate normally. Check
 coherent groups and final diff for drift/scope; remove unsupported changes.

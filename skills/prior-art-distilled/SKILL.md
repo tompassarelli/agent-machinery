@@ -14,9 +14,9 @@ history, separating facts from assumptions. Compare authoritative sources: the
 conventional solution and one different viable option when available; do not
 pad.
 
-Use `greenfield` for new dependencies and `external-code` before copying or
+Use `greenfield-distilled` for new dependencies and `external-code-distilled` before copying or
 adapting. Preserve permission, license, attribution, and revision. A departure
-needs its forcing requirement and one `verification` disproving check. Report
+needs its forcing requirement and one `verification-distilled` disproving check. Report
 decision, evidence, alternatives, reuse, licenses, uncertainty, and check; stop
 when the decision is honest.
 
