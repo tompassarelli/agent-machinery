@@ -12,9 +12,9 @@ const forbiddenBrands = [
   ["Anth", "ropic"], ["Open", "AI"], ["Clau", "de"], ["Code", "x"],
   ["Nor", "th"], ["Fi", "rn"], ["Nix", "OS"], ["Bea", "gle"],
 ].map((parts) => parts.join(""));
-const FORBIDDEN_TEXT = new RegExp(
+export const FORBIDDEN_TEXT = new RegExp(
   [["/", "home", "/"].join(""), ["~", "/"].join(""), ["mcp", "__"].join(""),
-    String.raw`\\b(?:${forbiddenBrands.join("|")})\\b`].join("|"),
+    String.raw`\b(?:${forbiddenBrands.join("|")})\b`].join("|"),
   "i",
 );
 

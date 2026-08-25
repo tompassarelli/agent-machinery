@@ -6,7 +6,12 @@ import {
   loadStaffingCatalog,
   validateRoutingRequest,
 } from "../index.mjs";
-import { validatePackage } from "../scripts/validate.mjs";
+import { FORBIDDEN_TEXT, validatePackage } from "../scripts/validate.mjs";
+
+test("forbidden provider brands match as real words", () => {
+  const brands = [["Open", "AI"], ["Nor", "th"]].map((parts) => parts.join(""));
+  for (const brand of brands) assert.equal(FORBIDDEN_TEXT.test(brand), true, brand);
+});
 
 test("export manifest is a closed provider-neutral package", () => {
   const result = validatePackage();
