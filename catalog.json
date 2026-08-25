@@ -1,0 +1,47 @@
+{
+  "$schema": "urn:agent-machinery:schema:catalog:v1",
+  "schema": "agent-machinery.catalog/v1",
+  "package": {
+    "name": "@tompassarelli/agent-machinery",
+    "version": "0.1.0",
+    "license": "MIT OR Apache-2.0"
+  },
+  "units": [
+    {"id":"agent-machinery","kind":"module","source":"catalog.json","members":["orchestration","agent-practice"]},
+    {"id":"orchestration","kind":"module","source":"doctrine.md","members":["staffing","compose"]},
+    {"id":"agent-practice","kind":"module","source":"catalog.json","members":["build-vs-reuse","external-code","greenfield","planning","prior-art","production-hardening","program-craftsmanship","program-stewardship","rust-development","skill-maintenance","terse","verification"]},
+    {"id":"staffing","kind":"skill","source":"staffing/SKILL.md"},
+    {"id":"compose","kind":"skill","source":"skills/compose/SKILL.md"},
+    {"id":"build-vs-reuse","kind":"skill","source":"skills/build-vs-reuse/SKILL.md"},
+    {"id":"external-code","kind":"skill","source":"skills/external-code/SKILL.md"},
+    {"id":"greenfield","kind":"skill","source":"skills/greenfield/SKILL.md"},
+    {"id":"planning","kind":"skill","source":"skills/planning/SKILL.md"},
+    {"id":"prior-art","kind":"skill","source":"skills/prior-art/SKILL.md"},
+    {"id":"production-hardening","kind":"skill","source":"skills/production-hardening/SKILL.md"},
+    {"id":"program-craftsmanship","kind":"skill","source":"skills/program-craftsmanship/SKILL.md"},
+    {"id":"program-stewardship","kind":"skill","source":"skills/program-stewardship/SKILL.md"},
+    {"id":"rust-development","kind":"skill","source":"skills/rust-development/SKILL.md"},
+    {"id":"skill-maintenance","kind":"skill","source":"skills/skill-maintenance/SKILL.md"},
+    {"id":"terse","kind":"skill","source":"skills/terse/SKILL.md"},
+    {"id":"verification","kind":"skill","source":"skills/verification/SKILL.md"}
+  ],
+  "assets": [
+    {"id":"orchestration-doctrine","type":"instructions","path":"doctrine.md"},
+    {"id":"staffing-catalog","type":"catalog","path":"staffing/catalog.json"},
+    {"id":"agent-templates","type":"generated-templates","path":"agents"},
+    {"id":"role-contracts","type":"source-blocks","path":"docs/roles.md"},
+    {"id":"task-grade-contracts","type":"source-blocks","path":"docs/task-grades.md"},
+    {"id":"topology-contracts","type":"source-blocks","path":"docs/topologies.md"},
+    {"id":"posture-contracts","type":"source-blocks","path":"docs/postures.md"},
+    {"id":"communication-contracts","type":"source-blocks","path":"docs/comms.md"},
+    {"id":"routing-guide","type":"instructions","path":"docs/routing.md"},
+    {"id":"composition-method","type":"instructions","path":"docs/method.md"},
+    {"id":"extension-guide","type":"instructions","path":"docs/extending.md"},
+    {"id":"export-catalog-schema","type":"catalog","path":"catalog.schema.json"},
+    {"id":"staffing-catalog-schema","type":"catalog","path":"staffing/catalog.schema.json"}
+  ],
+  "contracts": [
+    {"id":"routing-request-v2","schema":"contracts/routing-request.schema.json","fixtures":"contracts/routing-request.fixtures.json"},
+    {"id":"minimum-sufficient-v1","schema":"contracts/selection-assessment.schema.json","fixtures":"contracts/selection-assessment.fixtures.json"}
+  ]
+}

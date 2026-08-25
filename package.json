@@ -1,0 +1,46 @@
+{
+  "name": "@tompassarelli/agent-machinery",
+  "version": "0.1.0",
+  "description": "Provider-independent agent doctrine, types, templates, and procedures",
+  "type": "module",
+  "license": "MIT OR Apache-2.0",
+  "exports": {
+    ".": "./index.mjs",
+    "./catalog": "./catalog.json",
+    "./catalog.schema": "./catalog.schema.json",
+    "./doctrine": "./doctrine.md",
+    "./docs/*": "./docs/*",
+    "./staffing/*": "./staffing/*",
+    "./contracts/*": "./contracts/*",
+    "./agents/*": "./agents/*",
+    "./skills/*": "./skills/*"
+  },
+  "bin": {
+    "agent-machinery-compose-routing": "./scripts/compose-routing.mjs"
+  },
+  "scripts": {
+    "build": "node scripts/build-agents.mjs",
+    "check": "node scripts/validate.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "catalog.json",
+    "catalog.schema.json",
+    "doctrine.md",
+    "docs",
+    "staffing",
+    "contracts",
+    "agents",
+    "skills",
+    "scripts",
+    "LICENSE",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "NOTICE",
+    "PROVENANCE.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}

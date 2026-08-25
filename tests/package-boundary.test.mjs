@@ -1,0 +1,33 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {
+  assetPath,
+  loadExportCatalog,
+  loadStaffingCatalog,
+  validateRoutingRequest,
+} from "../index.mjs";
+import { validatePackage } from "../scripts/validate.mjs";
+
+test("export manifest is a closed provider-neutral package", () => {
+  const result = validatePackage();
+  assert.equal(result.units, 17);
+  assert.equal(result.templates, 16);
+});
+
+test("public index resolves declared assets and validators", () => {
+  const catalog = loadExportCatalog();
+  assert.equal(catalog.package.license, "MIT OR Apache-2.0");
+  assert.equal(loadStaffingCatalog().presets.length, 16);
+  assert.match(assetPath("doctrine.md"), /doctrine\.md$/);
+  const executor = {
+    role: "executor",
+    taskGrade: "novice",
+    domainRequirements: [],
+    topology: "worker",
+    tier: "economy",
+    reasoning: "low",
+    posture: "deliver",
+    composition: { kind: "template", id: "executor", overrides: [] },
+  };
+  assert.equal(validateRoutingRequest(executor), executor);
+});
