@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   assetPath,
+  defaultProjectExposureProfile,
   loadExportCatalog,
   loadStaffingCatalog,
   validateRoutingAdmission,
@@ -36,5 +37,9 @@ test("public index resolves declared assets and validators", () => {
     composition: { kind: "template", id: "executor", overrides: [] },
   };
   assert.equal(validateRoutingRequest(executor), executor);
-  assert.throws(() => validateRoutingAdmission(undefined, executor), /project exposure profile must be an object/);
+  assert.equal(validateRoutingAdmission(undefined, executor), executor);
+  const unclassified = defaultProjectExposureProfile();
+  assert.equal(unclassified.engineeringContext, "volatile-owner-controlled-research");
+  assert.equal(unclassified.facts.correctness, "exact-bounded-claim");
+  assert.deepEqual(unclassified.lifecycleBudget, []);
 });

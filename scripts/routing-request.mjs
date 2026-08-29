@@ -2,7 +2,7 @@ import {
   loadStaffingCatalog, validatePostureCapabilities, validateTopologyCapabilities,
 } from "./staffing-catalog.mjs";
 import { canonicalRoleId } from "./role-id.mjs";
-import { validateProjectExposureProfile } from "./project-exposure-profile.mjs";
+import { resolveProjectExposureProfile } from "./project-exposure-profile.mjs";
 
 export const ROUTING_REQUEST_SCHEMA_ID = "urn:agent-machinery:schema:routing-request:v2";
 export const ROUTING_FIELDS = [
@@ -135,6 +135,6 @@ export function validateRoutingRequest(value, catalog = loadStaffingCatalog()) {
 }
 
 export function validateRoutingAdmission(projectProfile, routingRequest, catalog = loadStaffingCatalog()) {
-  validateProjectExposureProfile(projectProfile);
+  resolveProjectExposureProfile(projectProfile);
   return validateRoutingRequest(routingRequest, catalog);
 }

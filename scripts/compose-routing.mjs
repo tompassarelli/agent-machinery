@@ -2,7 +2,7 @@
 import { loadStaffingCatalog } from "./staffing-catalog.mjs";
 import { readFileSync } from "node:fs";
 import { templateOverrides, validateRoutingAdmission } from "./routing-request.mjs";
-import { validateProjectExposureProfile } from "./project-exposure-profile.mjs";
+import { defaultProjectExposureProfile, validateProjectExposureProfile } from "./project-exposure-profile.mjs";
 import { canonicalRoleId } from "./role-id.mjs";
 import { assertAssessmentSelection, validateSelectionAssessment } from "./selection-assessment.mjs";
 
@@ -20,7 +20,8 @@ Routing options:
   --contract <JSON|@file>   bespoke authority/deliverable/done contract
   --assessment <JSON|@file> minimum-sufficient-v1 selection sidecar
   --project-profile <JSON|@file>
-                            required binding project-exposure-v1 sidecar
+                            binding project-exposure-v1 sidecar; omitted resolves
+                            to volatile owner-controlled research with no lifecycle budget
   --promotion-candidate     nominate a bespoke composition for review
   --no-promotion-candidate  explicit false (the default; accepted for clarity)
   --override-reason <why>   required when changing an overrideable stock-template axis
@@ -70,8 +71,9 @@ function argumentsOf(argv) {
 
 const catalog = loadStaffingCatalog();
 const args = argumentsOf(process.argv.slice(2));
-if (!args.projectProfile) die("routing admission requires --project-profile JSON|@file");
-const projectProfile = parseProjectProfile(args.projectProfile);
+const projectProfile = args.projectProfile
+  ? parseProjectProfile(args.projectProfile)
+  : defaultProjectExposureProfile("unclassified routing work");
 try { canonicalRoleId(args.role, "role"); }
 catch (error) { die(error.message); }
 const canonicalRole = args.role;

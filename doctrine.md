@@ -19,9 +19,11 @@ ORCHESTRATION ACTIVE — provider-independent routing doctrine for delegated wor
 Before planning, orchestration, verification, hardening, release, or
 provenance/immutability work, resolve and validate the scoped
 `project-exposure-v1` sidecar. It binds resolved engineering context and the
-lifecycle budget without adding a ninth routing field. Route only after the
-profile is present. Every lifecycle mechanism must cite one fact that the
-profile validator permits for that mechanism.
+lifecycle budget without adding a ninth routing field. Missing facts resolve to
+volatile owner-controlled research with exact bounded-claim correctness and an
+empty lifecycle budget; they never block ordinary work or imply higher stakes.
+Route only after that resolution. Every lifecycle mechanism must cite one fact
+that the profile validator permits for that mechanism.
 
 ## Route the work
 

@@ -25,6 +25,30 @@ export const LIFECYCLE_EVIDENCE = Object.freeze({
   "operational-hardening": ["named-intolerant-consumer", "live-durable-owner-state", "production-public-state", "irreversible-external-effect", "security-obligation", "audit-obligation", "financial-obligation", "availability-obligation", "explicit-operator-instruction"],
 });
 
+export function defaultProjectExposureProfile(scope = "unclassified work") {
+  return validateProjectExposureProfile({
+    version: PROJECT_EXPOSURE_PROFILE_VERSION,
+    scope,
+    facts: {
+      consumer: "unknown",
+      state: "none",
+      effect: "reversible",
+      correctness: "exact-bounded-claim",
+      boundaries: [],
+      stage: "exploratory",
+      explicitLifecycleEscalation: false,
+    },
+    engineeringContext: "volatile-owner-controlled-research",
+    lifecycleBudget: [],
+  });
+}
+
+export function resolveProjectExposureProfile(value, scope = "unclassified work") {
+  return value === undefined
+    ? defaultProjectExposureProfile(scope)
+    : validateProjectExposureProfile(value);
+}
+
 function object(value, label) {
   if (value == null || typeof value !== "object" || Array.isArray(value))
     throw new Error(`${label} must be an object`);
