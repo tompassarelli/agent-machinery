@@ -21,8 +21,9 @@ The human owns the goal. The listener owns reconciliation and remains
 accountable for every direct child it admits. A concrete run owns work only
 after it accepts an offer or acknowledges a direct transfer. An offer or
 unacknowledged transfer leaves ownership unchanged; refusal and escalation do
-not change the owner or goal. Acceptance retains the previous owner as the
-accountable parent, and results return through that immediate parent.
+not change the owner or goal. Offer acceptance retains the previous owner as
+the accountable parent; direct transfer preserves the existing accountable
+parent. Results return through that immediate parent.
 
 Use the catalogued `work-ownership-v1` contract for machine-checked offer,
 acceptance, transfer, refusal, and escalation transitions. Ownership never

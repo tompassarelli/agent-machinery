@@ -52,7 +52,7 @@
       }
     },
     {
-      "name": "acknowledged direct transfer moves ownership and retains its parent",
+      "name": "acknowledged direct transfer preserves its existing accountable parent",
       "transition": {
         "version": "work-ownership-v1",
         "before": {
@@ -69,7 +69,7 @@
         "after": {
           "goal": "deliver-agent-machinery-candidate",
           "owner": {"kind": "agent-run", "id": "run-2"},
-          "accountableParent": {"kind": "agent-run", "id": "run-1"},
+          "accountableParent": {"kind": "listener-agent", "id": "listener-1"},
           "pendingOffer": null
         }
       }
@@ -160,6 +160,30 @@
         "event": {
           "kind": "transfer", "actor": {"kind": "agent-run", "id": "run-1"},
           "to": {"kind": "agent-run", "id": "run-2"}
+        },
+        "after": {
+          "goal": "deliver-agent-machinery-candidate",
+          "owner": {"kind": "agent-run", "id": "run-2"},
+          "accountableParent": {"kind": "agent-run", "id": "run-1"},
+          "pendingOffer": null
+        }
+      }
+    },
+    {
+      "name": "acknowledged direct transfer cannot make the old owner its accountable parent",
+      "errorContains": "acknowledged transfer must preserve the existing accountable parent",
+      "transition": {
+        "version": "work-ownership-v1",
+        "before": {
+          "goal": "deliver-agent-machinery-candidate",
+          "owner": {"kind": "agent-run", "id": "run-1"},
+          "accountableParent": {"kind": "listener-agent", "id": "listener-1"},
+          "pendingOffer": null
+        },
+        "event": {
+          "kind": "transfer", "actor": {"kind": "agent-run", "id": "run-1"},
+          "to": {"kind": "agent-run", "id": "run-2"},
+          "acknowledgedBy": {"kind": "agent-run", "id": "run-2"}
         },
         "after": {
           "goal": "deliver-agent-machinery-candidate",

@@ -81,7 +81,7 @@ const canonicalRole = args.role;
 const implicitTemplate = catalog.presets.find(({ name }) => name === canonicalRole);
 const preset = args.template
   ? catalog.presets.find(({ name }) => name === args.template)
-  : implicitTemplate;
+  : (args.contract ? undefined : implicitTemplate);
 if (args.template && !preset) die(`unknown stock template: ${args.template}`);
 const nearest = args.nearest && catalog.presets.find(({ name }) => name === args.nearest);
 if (args.nearest && !nearest) die(`unknown nearest stock template: ${args.nearest}`);

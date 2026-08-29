@@ -84,3 +84,40 @@ test("public ownership validator keeps an unacknowledged transfer with its owner
   };
   assert.equal(validateWorkOwnershipTransition(transition), transition);
 });
+
+test("compose-routing honors an explicit bespoke contract for a stock-named role", () => {
+  const contract = {
+    responsibility: "integrate a bounded cross-seam repair",
+    deliverable: "a verified unpublished repair candidate",
+    capabilities: ["filesystem.read", "filesystem.search", "filesystem.write", "shell"],
+    mayDecide: ["implementation details within the repair brief"],
+    mustEscalate: ["publication or activation"],
+    doneWhen: ["the focused checks pass and the lane is clean"],
+    report: "candidate commit, tree, paths, checks, and uncertainty",
+  };
+  const result = Bun.spawnSync([
+    process.execPath,
+    new URL("../scripts/compose-routing.mjs", import.meta.url).pathname,
+    "integrator",
+    "--task-grade", "senior",
+    "--topology", "worker",
+    "--tier", "senior",
+    "--deliberation", "high",
+    "--posture", "deliver",
+    "--rationale", "the explicit contract narrows the stock responsibility",
+    "--contract", JSON.stringify(contract),
+  ]);
+  assert.equal(result.exitCode, 0, new TextDecoder().decode(result.stderr));
+  const request = JSON.parse(new TextDecoder().decode(result.stdout));
+  assert.deepEqual(Object.keys(request), [
+    "role", "taskGrade", "domainRequirements", "topology", "tier", "posture", "reasoning", "composition",
+  ]);
+  assert.equal(request.role, "integrator");
+  assert.deepEqual(request.composition, {
+    kind: "bespoke",
+    id: "integrator",
+    bespokeReason: "the explicit contract narrows the stock responsibility",
+    promotionCandidate: false,
+    contract,
+  });
+});

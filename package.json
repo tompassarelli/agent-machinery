@@ -22,7 +22,7 @@
     "build:ownership": "beagle build scripts/work-ownership.bjs scripts/work-ownership.js",
     "build:agents": "bun scripts/build-agents.mjs",
     "build": "bun run build:ownership && bun run build:agents",
-    "check:ownership": "beagle check scripts/work-ownership.bjs && beagle fmt --check scripts/work-ownership.bjs",
+    "check:ownership": "beagle check scripts/work-ownership.bjs && beagle fmt --check scripts/work-ownership.bjs && bun scripts/check-work-ownership-generated.mjs",
     "check": "bun run check:ownership && bun scripts/validate.mjs",
     "test": "bun test tests/*.test.mjs"
   },
