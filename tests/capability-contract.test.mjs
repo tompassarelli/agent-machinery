@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import {
   AGENT_SOURCE_PATHS,
   CATALOG_SCHEMA_ID,
+  PROJECT_EXPOSURE_PROFILE_SCHEMA_ID,
   ROUTING_REQUEST_SCHEMA_ID,
   SELECTION_ASSESSMENT_SCHEMA_ID,
   STAFFING_CATALOG_SCHEMA_ID,
@@ -22,6 +23,7 @@ test("catalog assets and contracts bind stable versioned IDs to shipped schemas"
   const catalog = loadExportCatalog();
   const expected = [
     CATALOG_SCHEMA_ID,
+    PROJECT_EXPOSURE_PROFILE_SCHEMA_ID,
     STAFFING_CATALOG_SCHEMA_ID,
     ROUTING_REQUEST_SCHEMA_ID,
     SELECTION_ASSESSMENT_SCHEMA_ID,

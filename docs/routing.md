@@ -1,5 +1,11 @@
 # Routing contract
 
+Routing follows a validated `project-exposure-v1` sidecar. That sidecar binds
+the scoped resolved engineering context and lifecycle budget without adding a
+routing field. Consumers use `validateRoutingAdmission(projectProfile,
+routingRequest)` at the execution boundary; raw routing validation alone does
+not admit work.
+
 The provider-independent routing request has exactly eight fields:
 
 | Field | Meaning |

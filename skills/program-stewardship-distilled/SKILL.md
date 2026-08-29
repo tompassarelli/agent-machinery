@@ -8,6 +8,8 @@ description: >-
 
 # Program stewardship
 
+Require a validated `project-exposure-v1` sidecar first; derive the lifecycle
+budget from its scoped facts.
 Choose a floor from scope/lifetime, failure cost, durable surfaces, evidence,
 cleanup, and debt. Bound disposable work by disposal/promotion; leave normal
 work understandable and tested.

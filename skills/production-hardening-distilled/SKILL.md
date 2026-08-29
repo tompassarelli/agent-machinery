@@ -8,6 +8,8 @@ description: >-
 
 # Production hardening
 
+Require a validated `project-exposure-v1` sidecar first; harden only the scoped
+fact-backed boundary it admits.
 Name one guarantee, scenario, degradation, hostility, assumptions, durable
 state, recovery, and deciding evidence; do not broaden. Trace only its relevant
 admission, resources, effects, cancellation, persistence, recovery, and

@@ -9,6 +9,8 @@ description: >-
 
 # Engineering planning
 
+Require a validated `project-exposure-v1` sidecar first; keep every added
+lifecycle mechanism inside its scoped fact-backed budget.
 Name outcome, scope, preserved behavior, decision ownership, and evidence.
 Ground plans in real consumers, authorities, durable/public surfaces, and
 operations; invent no compatibility. Expose central risk early; state migration,

@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
+import { validateProjectExposureProfile } from "./project-exposure-profile.mjs";
 import { validateRoutingRequest } from "./routing-request.mjs";
 import { validateSelectionAssessment } from "./selection-assessment.mjs";
 import { validateStaffingCatalog } from "./staffing-catalog.mjs";
@@ -10,6 +11,10 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 
 const definitions = new Map([
+  ["project-exposure-v1", {
+    schema: "contracts/project-exposure-profile.schema.json",
+    semantic: validateProjectExposureProfile,
+  }],
   ["routing-request-v2", {
     schema: "contracts/routing-request.schema.json",
     semantic: validateRoutingRequest,

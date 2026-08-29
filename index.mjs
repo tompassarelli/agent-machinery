@@ -14,12 +14,22 @@ export {
   validateTopologyCapabilities,
 } from "./scripts/staffing-catalog.mjs";
 export {
+  LIFECYCLE_EVIDENCE,
+  PROFILE_FACT_VALUES,
+  PROJECT_EXPOSURE_PROFILE_SCHEMA_ID,
+  PROJECT_EXPOSURE_PROFILE_VERSION,
+  ENGINEERING_CONTEXTS,
+  deriveEngineeringContext,
+  validateProjectExposureProfile,
+} from "./scripts/project-exposure-profile.mjs";
+export {
   ROUTING_REQUEST_SCHEMA_ID,
   CONTRACT_FIELDS,
   OVERRIDE_FIELDS,
   ROUTING_FIELDS,
   effectivePreset,
   templateOverrides,
+  validateRoutingAdmission,
   validateRoutingRequest,
 } from "./scripts/routing-request.mjs";
 export {

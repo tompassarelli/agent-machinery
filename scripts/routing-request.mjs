@@ -2,6 +2,7 @@ import {
   loadStaffingCatalog, validatePostureCapabilities, validateTopologyCapabilities,
 } from "./staffing-catalog.mjs";
 import { canonicalRoleId } from "./role-id.mjs";
+import { validateProjectExposureProfile } from "./project-exposure-profile.mjs";
 
 export const ROUTING_REQUEST_SCHEMA_ID = "urn:agent-machinery:schema:routing-request:v2";
 export const ROUTING_FIELDS = [
@@ -131,4 +132,9 @@ export function validateRoutingRequest(value, catalog = loadStaffingCatalog()) {
     throw new Error("composition.kind must be template or bespoke");
   }
   return request;
+}
+
+export function validateRoutingAdmission(projectProfile, routingRequest, catalog = loadStaffingCatalog()) {
+  validateProjectExposureProfile(projectProfile);
+  return validateRoutingRequest(routingRequest, catalog);
 }

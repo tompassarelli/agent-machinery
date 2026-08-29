@@ -55,6 +55,7 @@
     {"id":"staffing-catalog-schema","type":"catalog","path":"staffing/catalog.schema.json"}
   ],
   "contracts": [
+    {"id":"project-exposure-v1","schema":"contracts/project-exposure-profile.schema.json","schemaScope":"structural","fixtures":"contracts/project-exposure-profile.fixtures.json","validator":"validateContract"},
     {"id":"routing-request-v2","schema":"contracts/routing-request.schema.json","schemaScope":"structural","fixtures":"contracts/routing-request.fixtures.json","validator":"validateContract"},
     {"id":"minimum-sufficient-v1","schema":"contracts/selection-assessment.schema.json","schemaScope":"structural","fixtures":"contracts/selection-assessment.fixtures.json","validator":"validateContract"},
     {"id":"staffing-catalog-v2","schema":"staffing/catalog.schema.json","schemaScope":"structural","fixtures":"staffing/catalog.fixtures.json","validator":"validateContract"}

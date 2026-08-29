@@ -10,6 +10,11 @@ const ajv = new Ajv2020({ allErrors: true, strict: false });
 
 const cases = [
   {
+    id: "project-exposure-v1",
+    fixture: readJson("contracts/project-exposure-profile.fixtures.json"),
+    value: (item) => item.profile,
+  },
+  {
     id: "routing-request-v2",
     fixture: readJson("contracts/routing-request.fixtures.json"),
     value: (item) => item.request,

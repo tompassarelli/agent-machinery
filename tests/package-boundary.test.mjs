@@ -4,6 +4,7 @@ import {
   assetPath,
   loadExportCatalog,
   loadStaffingCatalog,
+  validateRoutingAdmission,
   validateRoutingRequest,
 } from "../index.mjs";
 import { FORBIDDEN_TEXT, validatePackage } from "../scripts/validate.mjs";
@@ -35,4 +36,5 @@ test("public index resolves declared assets and validators", () => {
     composition: { kind: "template", id: "executor", overrides: [] },
   };
   assert.equal(validateRoutingRequest(executor), executor);
+  assert.throws(() => validateRoutingAdmission(undefined, executor), /project exposure profile must be an object/);
 });

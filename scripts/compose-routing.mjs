@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import { loadStaffingCatalog } from "./staffing-catalog.mjs";
 import { readFileSync } from "node:fs";
-import { templateOverrides, validateRoutingRequest } from "./routing-request.mjs";
+import { templateOverrides, validateRoutingAdmission } from "./routing-request.mjs";
+import { validateProjectExposureProfile } from "./project-exposure-profile.mjs";
 import { canonicalRoleId } from "./role-id.mjs";
 import { assertAssessmentSelection, validateSelectionAssessment } from "./selection-assessment.mjs";
 
@@ -18,6 +19,8 @@ Routing options:
   --rationale <reason>      required when <role> is not a stock template
   --contract <JSON|@file>   bespoke authority/deliverable/done contract
   --assessment <JSON|@file> minimum-sufficient-v1 selection sidecar
+  --project-profile <JSON|@file>
+                            required binding project-exposure-v1 sidecar
   --promotion-candidate     nominate a bespoke composition for review
   --no-promotion-candidate  explicit false (the default; accepted for clarity)
   --override-reason <why>   required when changing an overrideable stock-template axis
@@ -43,7 +46,8 @@ function argumentsOf(argv) {
     "--taskGrade": "taskGrade", "--task-grade": "taskGrade", "--domain": "domain",
     "--topology": "topology", "--tier": "tier", "--deliberation": "deliberation", "--reasoning": "deliberation",
     "--posture": "posture", "--nearest": "nearest", "--rationale": "rationale",
-    "--contract": "contract", "--assessment": "assessment", "--override-reason": "overrideReason",
+    "--contract": "contract", "--assessment": "assessment", "--project-profile": "projectProfile",
+    "--override-reason": "overrideReason",
     "--promotion-candidate": "promotionCandidate", "--no-promotion-candidate": "noPromotionCandidate",
   };
   for (let index = 1; index < argv.length; index++) {
@@ -66,6 +70,8 @@ function argumentsOf(argv) {
 
 const catalog = loadStaffingCatalog();
 const args = argumentsOf(process.argv.slice(2));
+if (!args.projectProfile) die("routing admission requires --project-profile JSON|@file");
+const projectProfile = parseProjectProfile(args.projectProfile);
 try { canonicalRoleId(args.role, "role"); }
 catch (error) { die(error.message); }
 const canonicalRole = args.role;
@@ -104,6 +110,15 @@ function parseAssessment(input) {
   try { value = JSON.parse(source); }
   catch (error) { die(`--assessment must be valid JSON or @file: ${error.message}`); }
   try { return validateSelectionAssessment(value); }
+  catch (error) { die(error.message); }
+}
+
+function parseProjectProfile(input) {
+  const source = input.startsWith("@") ? readFileSync(input.slice(1), "utf8") : input;
+  let value;
+  try { value = JSON.parse(source); }
+  catch (error) { die(`--project-profile must be valid JSON or @file: ${error.message}`); }
+  try { return validateProjectExposureProfile(value); }
   catch (error) { die(error.message); }
 }
 
@@ -152,7 +167,7 @@ if (preset) {
   if (overrides.length) payload.composition.overrideReason = args.overrideReason.trim();
 }
 
-try { validateRoutingRequest(payload, catalog); }
+try { validateRoutingAdmission(projectProfile, payload, catalog); }
 catch (error) { die(error.message); }
 if (assessment) {
   try { assertAssessmentSelection(assessment, payload.tier, payload.reasoning); }

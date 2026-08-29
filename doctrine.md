@@ -14,6 +14,15 @@ ORCHESTRATION ACTIVE — provider-independent routing doctrine for delegated wor
   hooks, processes, and other resources or source authorities are not actors.
   They may constrain, carry, or enforce authority but do not possess intent.
 
+## Admit project exposure before routing
+
+Before planning, orchestration, verification, hardening, release, or
+provenance/immutability work, resolve and validate the scoped
+`project-exposure-v1` sidecar. It binds resolved engineering context and the
+lifecycle budget without adding a ninth routing field. Route only after the
+profile is present. Every lifecycle mechanism must cite one fact that the
+profile validator permits for that mechanism.
+
 ## Route the work
 
 Choose function from task shape. Choose grade, domains, topology, semantic

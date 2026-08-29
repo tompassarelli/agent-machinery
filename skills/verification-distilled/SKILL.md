@@ -8,6 +8,8 @@ description: >-
 
 # Verification
 
+Require a validated `project-exposure-v1` sidecar first; its scoped fact-backed
+budget controls generalized assurance, release, and provenance/immutability.
 Name claim, profile, and pass/fail action. Skip checks unable to change action;
 stop when decided. Price every loop's time, remaining uses, cheapest optimization,
 and break-even. Optimize only when it pays, never by weakening evidence. At 2x
