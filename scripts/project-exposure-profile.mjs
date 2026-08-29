@@ -24,6 +24,7 @@ export const LIFECYCLE_EVIDENCE = Object.freeze({
   "release-ceremony": ["named-intolerant-consumer", "production-public-state", "irreversible-external-effect", "security-obligation", "audit-obligation", "financial-obligation", "availability-obligation", "explicit-operator-instruction"],
   "operational-hardening": ["named-intolerant-consumer", "live-durable-owner-state", "production-public-state", "irreversible-external-effect", "security-obligation", "audit-obligation", "financial-obligation", "availability-obligation", "explicit-operator-instruction"],
 });
+const LIFECYCLE_MECHANISMS = Object.freeze(Object.keys(LIFECYCLE_EVIDENCE));
 
 export function defaultProjectExposureProfile(scope = "unclassified work") {
   return validateProjectExposureProfile({
@@ -36,7 +37,7 @@ export function defaultProjectExposureProfile(scope = "unclassified work") {
       correctness: "exact-bounded-claim",
       boundaries: [],
       stage: "exploratory",
-      explicitLifecycleEscalation: false,
+      explicitLifecycleActions: [],
     },
     engineeringContext: "volatile-owner-controlled-research",
     lifecycleBudget: [],
@@ -75,7 +76,7 @@ function nonEmptyString(value, label) {
 
 function validateFacts(value) {
   const facts = object(value, "project exposure facts");
-  const fields = ["consumer", "state", "effect", "correctness", "boundaries", "stage", "explicitLifecycleEscalation"];
+  const fields = ["consumer", "state", "effect", "correctness", "boundaries", "stage", "explicitLifecycleActions"];
   keysExactly(facts, fields, [], "project exposure facts");
   for (const field of ["consumer", "state", "effect", "correctness"])
     enumValue(facts[field], PROFILE_FACT_VALUES[field], `project exposure facts.${field}`);
@@ -84,8 +85,10 @@ function validateFacts(value) {
       new Set(facts.boundaries).size !== facts.boundaries.length)
     throw new Error(`project exposure facts.boundaries must contain unique values from: ${PROFILE_FACT_VALUES.boundaries.join(", ")}`);
   enumValue(facts.stage, PROFILE_FACT_VALUES.stage, "project exposure facts.stage");
-  if (typeof facts.explicitLifecycleEscalation !== "boolean")
-    throw new Error("project exposure facts.explicitLifecycleEscalation must be boolean");
+  if (!Array.isArray(facts.explicitLifecycleActions) ||
+      facts.explicitLifecycleActions.some((mechanism) => !LIFECYCLE_MECHANISMS.includes(mechanism)) ||
+      new Set(facts.explicitLifecycleActions).size !== facts.explicitLifecycleActions.length)
+    throw new Error(`project exposure facts.explicitLifecycleActions must contain unique values from: ${LIFECYCLE_MECHANISMS.join(", ")}`);
   return facts;
 }
 
@@ -95,8 +98,7 @@ export function deriveEngineeringContext(factsValue) {
     facts.consumer === "named-break-tolerant" || facts.consumer === "named-break-intolerant" ||
     facts.state === "production-or-public" ||
     facts.effect === "irreversible-external" ||
-    facts.boundaries.some((boundary) => ["security", "audit", "financial", "availability"].includes(boundary)) ||
-    facts.explicitLifecycleEscalation;
+    facts.boundaries.some((boundary) => ["security", "audit", "financial", "availability"].includes(boundary));
   if (externallyDependedUpon) return "externally-depended-upon";
   if (facts.stage === "personally-operational" || facts.state === "live-durable-owner") return "personally-operational";
   return "volatile-owner-controlled-research";
@@ -112,7 +114,6 @@ function presentEvidence(facts) {
     evidence.add(["producer-substitution", "concurrent-writer"].includes(boundary)
       ? boundary : `${boundary}-obligation`);
   }
-  if (facts.explicitLifecycleEscalation) evidence.add("explicit-operator-instruction");
   return evidence;
 }
 
@@ -141,7 +142,10 @@ export function validateProjectExposureProfile(value) {
     if (seen.has(entry.mechanism)) throw new Error(`duplicate project exposure lifecycle mechanism: ${entry.mechanism}`);
     seen.add(entry.mechanism);
     enumValue(entry.evidence, allowed, `project exposure lifecycle ${entry.mechanism} evidence`);
-    if (!present.has(entry.evidence))
+    if (entry.evidence === "explicit-operator-instruction" &&
+        !facts.explicitLifecycleActions.includes(entry.mechanism))
+      throw new Error(`project exposure lifecycle ${entry.mechanism} cites absent explicit action ${entry.mechanism}`);
+    if (entry.evidence !== "explicit-operator-instruction" && !present.has(entry.evidence))
       throw new Error(`project exposure lifecycle ${entry.mechanism} cites absent fact ${entry.evidence}`);
   }
   return profile;

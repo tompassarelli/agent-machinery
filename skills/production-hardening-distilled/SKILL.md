@@ -8,8 +8,14 @@ description: >-
 
 # Production hardening
 
-Require a validated `project-exposure-v1` sidecar first; harden only the scoped
-fact-backed boundary it admits.
+Start from the internally resolved `project-exposure-v1` profile. When no
+profile or concrete exposure facts are supplied, silently use the validated
+volatile owner-controlled research default; record no profile artifact,
+sidecar, or form. Materialize a machine sidecar only at a boundary that needs
+it. Harden only the scoped fact-backed boundary it admits. The default admits
+no operational hardening: return to the shortest deliverable, artifact, or
+rapid prototype unless a production fact or matching explicit action admits
+this mechanism. Safety and exact bounded-claim correctness remain binding.
 Name one guarantee, scenario, degradation, hostility, assumptions, durable
 state, recovery, and deciding evidence; do not broaden. Trace only its relevant
 admission, resources, effects, cancellation, persistence, recovery, and

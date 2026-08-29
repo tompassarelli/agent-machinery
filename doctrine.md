@@ -29,16 +29,18 @@ Use the catalogued `work-ownership-v1` contract for machine-checked offer,
 acceptance, transfer, refusal, and escalation transitions. Ownership never
 widens the accepted routing request or topology.
 
-## Admit project exposure before routing
+## Resolve project exposure before work
 
-Before planning, coordination, verification, hardening, release, or
-provenance/immutability work, resolve and validate the scoped
-`project-exposure-v1` sidecar. It binds resolved engineering context and the
-lifecycle budget without adding a ninth routing field. Missing facts resolve to
-volatile owner-controlled research with exact bounded-claim correctness and an
-empty lifecycle budget; they never block ordinary work or imply higher stakes.
-Route only after that resolution. Every lifecycle mechanism must cite one fact
-that the profile validator permits for that mechanism.
+Before work, resolve the scoped `project-exposure-v1` profile internally from
+concrete facts. The required order is facts, resolved engineering context,
+admitted lifecycle actions, then execution. Missing facts resolve to volatile
+owner-controlled research with exact bounded-claim correctness and an empty
+lifecycle budget; they require no recorded profile artifact, sidecar, or form
+and never imply higher stakes. Materialize and validate a machine sidecar only
+at a boundary that needs it. Every lifecycle mechanism must cite one fact that
+the profile validator permits for that mechanism. Explicit operator direction
+admits only the matching mechanism citing `explicit-operator-instruction` and
+does not by itself change the resolved engineering context.
 
 ## Route the work
 

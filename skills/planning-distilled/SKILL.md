@@ -9,8 +9,14 @@ description: >-
 
 # Engineering planning
 
-Require a validated `project-exposure-v1` sidecar first; keep every added
-lifecycle mechanism inside its scoped fact-backed budget.
+Start from the internally resolved `project-exposure-v1` profile. When no
+profile or concrete exposure facts are supplied, silently use the validated
+volatile owner-controlled research default; record no profile artifact,
+sidecar, or form. Materialize a machine sidecar only at a boundary that needs
+it. Keep every lifecycle mechanism inside its scoped fact-backed budget.
+For default research, plan the shortest deliverable, artifact, or rapid
+prototype that can falsify the thesis, plus one decision-changing check. Safety
+and exact bounded-claim correctness remain binding.
 Name outcome, scope, preserved behavior, decision ownership, and evidence.
 Ground plans in real consumers, authorities, durable/public surfaces, and
 operations; invent no compatibility. Expose central risk early; state migration,

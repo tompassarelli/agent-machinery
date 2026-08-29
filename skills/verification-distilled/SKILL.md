@@ -8,11 +8,19 @@ description: >-
 
 # Verification
 
-Require a validated `project-exposure-v1` sidecar first; its scoped fact-backed
-budget controls generalized assurance, release, and provenance/immutability.
-Name claim, profile, and pass/fail action. Skip checks unable to change action;
-stop when decided. Price every loop's time, remaining uses, cheapest optimization,
-and break-even. Optimize only when it pays, never by weakening evidence. At 2x
+Start from the internally resolved `project-exposure-v1` profile. When no
+profile or concrete exposure facts are supplied, silently use the validated
+volatile owner-controlled research default; record no profile artifact,
+sidecar, or form. Materialize a machine sidecar only at a boundary that needs
+it. Its scoped fact-backed budget controls generalized assurance, release, and
+provenance/immutability.
+For default research, check only the exact bounded claim needed for the
+deliverable, artifact, or rapid prototype and the one decision-changing check.
+Safety and exact bounded-claim correctness remain binding.
+Name claim, resolved context, and pass/fail action. Skip checks unable to
+change action; stop when decided. Price every loop's time, remaining uses,
+cheapest optimization, and break-even. Optimize only when it pays, never by
+weakening evidence. At 2x
 expectation stop, preserve, classify, and reprice before retry/timeout change.
 Never retry into proof.
 

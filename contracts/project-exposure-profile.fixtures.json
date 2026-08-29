@@ -8,7 +8,7 @@
         "scope": "exploratory thesis implementation",
         "facts": {
           "consumer": "owner-only", "state": "volatile-local", "effect": "reversible",
-          "correctness": "exploratory-thesis", "boundaries": [], "stage": "exploratory", "explicitLifecycleEscalation": false
+          "correctness": "exploratory-thesis", "boundaries": [], "stage": "exploratory", "explicitLifecycleActions": []
         },
         "engineeringContext": "volatile-owner-controlled-research",
         "lifecycleBudget": []
@@ -21,7 +21,7 @@
         "scope": "unconsumed research project",
         "facts": {
           "consumer": "unknown", "state": "none", "effect": "reversible",
-          "correctness": "exact-bounded-claim", "boundaries": [], "stage": "exploratory", "explicitLifecycleEscalation": false
+          "correctness": "exact-bounded-claim", "boundaries": [], "stage": "exploratory", "explicitLifecycleActions": []
         },
         "engineeringContext": "volatile-owner-controlled-research",
         "lifecycleBudget": []
@@ -34,7 +34,7 @@
         "scope": "published protocol consumed by a named break-intolerant service",
         "facts": {
           "consumer": "named-break-intolerant", "state": "production-or-public", "effect": "reversible",
-          "correctness": "external-contract", "boundaries": ["availability"], "stage": "externally-depended-upon", "explicitLifecycleEscalation": false
+          "correctness": "external-contract", "boundaries": ["availability"], "stage": "externally-depended-upon", "explicitLifecycleActions": []
         },
         "engineeringContext": "externally-depended-upon",
         "lifecycleBudget": [
@@ -50,12 +50,27 @@
         "scope": "Store durability boundary only; adjacent exploration excluded",
         "facts": {
           "consumer": "owner-only", "state": "production-or-public", "effect": "reversible",
-          "correctness": "exact-bounded-claim", "boundaries": ["concurrent-writer"], "stage": "externally-depended-upon", "explicitLifecycleEscalation": false
+          "correctness": "exact-bounded-claim", "boundaries": ["concurrent-writer"], "stage": "externally-depended-upon", "explicitLifecycleActions": []
         },
         "engineeringContext": "externally-depended-upon",
         "lifecycleBudget": [
           { "mechanism": "operational-hardening", "evidence": "production-public-state" },
           { "mechanism": "provenance-immutability", "evidence": "concurrent-writer" }
+        ]
+      }
+    },
+    {
+      "name": "explicit release direction admits only release ceremony without promoting research context",
+      "profile": {
+        "version": "project-exposure-v1",
+        "scope": "operator-requested release ceremony for a research artifact",
+        "facts": {
+          "consumer": "owner-only", "state": "volatile-local", "effect": "reversible",
+          "correctness": "exact-bounded-claim", "boundaries": [], "stage": "exploratory", "explicitLifecycleActions": ["release-ceremony"]
+        },
+        "engineeringContext": "volatile-owner-controlled-research",
+        "lifecycleBudget": [
+          { "mechanism": "release-ceremony", "evidence": "explicit-operator-instruction" }
         ]
       }
     }
@@ -68,19 +83,19 @@
         "version": "project-exposure-v1", "scope": "unclassified owner work",
         "facts": {
           "consumer": "unknown", "state": "none", "effect": "reversible",
-          "correctness": "exploratory-thesis", "boundaries": [], "stage": "exploratory", "explicitLifecycleEscalation": false
+          "correctness": "exploratory-thesis", "boundaries": [], "stage": "exploratory", "explicitLifecycleActions": []
         },
         "engineeringContext": "externally-depended-upon", "lifecycleBudget": []
       }
     },
     {
       "name": "core claim correctness cannot admit generalized assurance",
-      "errorContains": "generalized-assurance cites absent fact",
+      "errorContains": "generalized-assurance cites absent explicit action generalized-assurance",
       "profile": {
         "version": "project-exposure-v1", "scope": "research core claim",
         "facts": {
           "consumer": "owner-only", "state": "volatile-local", "effect": "reversible",
-          "correctness": "exact-bounded-claim", "boundaries": [], "stage": "exploratory", "explicitLifecycleEscalation": false
+          "correctness": "exact-bounded-claim", "boundaries": [], "stage": "exploratory", "explicitLifecycleActions": ["release-ceremony"]
         },
         "engineeringContext": "volatile-owner-controlled-research",
         "lifecycleBudget": [{ "mechanism": "generalized-assurance", "evidence": "explicit-operator-instruction" }]
@@ -93,7 +108,7 @@
         "version": "project-exposure-v1", "scope": "break-tolerant experiment",
         "facts": {
           "consumer": "named-break-tolerant", "state": "volatile-local", "effect": "reversible",
-          "correctness": "exploratory-thesis", "boundaries": [], "stage": "externally-depended-upon", "explicitLifecycleEscalation": false
+          "correctness": "exploratory-thesis", "boundaries": [], "stage": "externally-depended-upon", "explicitLifecycleActions": []
         },
         "engineeringContext": "externally-depended-upon",
         "lifecycleBudget": [{ "mechanism": "compatibility", "evidence": "named-intolerant-consumer" }]
@@ -106,10 +121,38 @@
         "version": "project-exposure-v1", "scope": "single-producer research output",
         "facts": {
           "consumer": "owner-only", "state": "volatile-local", "effect": "reversible",
-          "correctness": "exact-bounded-claim", "boundaries": [], "stage": "exploratory", "explicitLifecycleEscalation": false
+          "correctness": "exact-bounded-claim", "boundaries": [], "stage": "exploratory", "explicitLifecycleActions": []
         },
         "engineeringContext": "volatile-owner-controlled-research",
         "lifecycleBudget": [{ "mechanism": "provenance-immutability", "evidence": "producer-substitution" }]
+      }
+    },
+    {
+      "name": "explicit lifecycle actions must be unique",
+      "errorContains": "structurally invalid",
+      "schemaInvalid": true,
+      "profile": {
+        "version": "project-exposure-v1", "scope": "duplicate operator direction",
+        "facts": {
+          "consumer": "owner-only", "state": "volatile-local", "effect": "reversible",
+          "correctness": "exact-bounded-claim", "boundaries": [], "stage": "exploratory",
+          "explicitLifecycleActions": ["release-ceremony", "release-ceremony"]
+        },
+        "engineeringContext": "volatile-owner-controlled-research", "lifecycleBudget": []
+      }
+    },
+    {
+      "name": "explicit lifecycle actions use canonical mechanism identifiers",
+      "errorContains": "structurally invalid",
+      "schemaInvalid": true,
+      "profile": {
+        "version": "project-exposure-v1", "scope": "unknown operator direction",
+        "facts": {
+          "consumer": "owner-only", "state": "volatile-local", "effect": "reversible",
+          "correctness": "exact-bounded-claim", "boundaries": [], "stage": "exploratory",
+          "explicitLifecycleActions": ["deployment"]
+        },
+        "engineeringContext": "volatile-owner-controlled-research", "lifecycleBudget": []
       }
     }
   ]

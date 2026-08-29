@@ -5,6 +5,8 @@ import {
   defaultProjectExposureProfile,
   loadExportCatalog,
   loadStaffingCatalog,
+  resolveProjectExposureProfile,
+  validateProjectExposureProfile,
   validateWorkOwnershipTransition,
   validateRoutingAdmission,
   validateRoutingRequest,
@@ -59,10 +61,32 @@ test("public index resolves declared assets and validators", () => {
   };
   assert.equal(validateRoutingRequest(executor), executor);
   assert.equal(validateRoutingAdmission(undefined, executor), executor);
-  const unclassified = defaultProjectExposureProfile();
+});
+
+test("omitted project exposure resolves to research without a recorded profile artifact", () => {
+  const unclassified = resolveProjectExposureProfile(undefined);
   assert.equal(unclassified.engineeringContext, "volatile-owner-controlled-research");
   assert.equal(unclassified.facts.correctness, "exact-bounded-claim");
+  assert.deepEqual(unclassified.facts.explicitLifecycleActions, []);
   assert.deepEqual(unclassified.lifecycleBudget, []);
+});
+
+test("episodic prior failure: explicit release-only direction cannot authorize adjacent lifecycle actions", () => {
+  const profile = defaultProjectExposureProfile("episodic prior failure");
+  profile.facts.explicitLifecycleActions = ["release-ceremony"];
+  for (const mechanism of [
+    "compatibility",
+    "rollback",
+    "generalized-assurance",
+    "provenance-immutability",
+    "operational-hardening",
+  ]) {
+    profile.lifecycleBudget = [{ mechanism, evidence: "explicit-operator-instruction" }];
+    assert.throws(
+      () => validateProjectExposureProfile(profile),
+      new RegExp(`project exposure lifecycle ${mechanism} cites absent explicit action ${mechanism}`),
+    );
+  }
 });
 
 test("public ownership validator keeps an unacknowledged transfer with its owner", () => {
