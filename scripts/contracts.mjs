@@ -6,6 +6,7 @@ import { validateProjectExposureProfile } from "./project-exposure-profile.mjs";
 import { validateRoutingRequest } from "./routing-request.mjs";
 import { validateSelectionAssessment } from "./selection-assessment.mjs";
 import { validateStaffingCatalog } from "./staffing-catalog.mjs";
+import { validateWorkOwnershipTransition } from "./work-ownership.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const ajv = new Ajv2020({ allErrors: true, strict: false });
@@ -14,6 +15,10 @@ const definitions = new Map([
   ["project-exposure-v1", {
     schema: "contracts/project-exposure-profile.schema.json",
     semantic: validateProjectExposureProfile,
+  }],
+  ["work-ownership-v1", {
+    schema: "contracts/work-ownership.schema.json",
+    semantic: validateWorkOwnershipTransition,
   }],
   ["routing-request-v2", {
     schema: "contracts/routing-request.schema.json",

@@ -13,18 +13,20 @@ The provider-independent routing request has exactly eight fields:
 
 | Field | Meaning |
 | --- | --- |
-| `role` | Stable lowercase kebab-case responsibility ID |
+| `role` | Stable lowercase kebab-case responsibility ID, independent of template identity |
 | `taskGrade` | Work scope and autonomy prior |
 | `domainRequirements` | Context or expertise the brief must supply |
 | `topology` | `worker` or `orchestrator` authority |
 | `tier` | Semantic capability floor |
 | `reasoning` | Deliberation level |
 | `posture` | Value-collision ordering |
-| `composition` | Stock template or complete bespoke contract |
+| `composition` | Stock template or complete bespoke contract, including composition provenance |
 
-Stock templates have fixed topology and capabilities. Overrides may change
-task grade, domains, tier, reasoning, or posture and must record the exact
-changed fields plus one reason. A bespoke composition supplies responsibility,
+Stock templates have fixed topology and capabilities. `composition.id` names
+the template and may differ from `role`; that identity is nested provenance
+metadata, not ownership, authority, or a ninth field. Overrides may change task
+grade, domains, tier, reasoning, or posture and must record the exact changed
+fields plus one reason. A bespoke composition supplies responsibility,
 deliverable, capabilities, decision and escalation bounds, done criteria, and
 report shape.
 
@@ -47,6 +49,8 @@ not a ninth routing field.
 Consumers map canonical capabilities to concrete tools and sandboxes. Missing
 or unenforceable capability mappings fail closed. Provider, model, account,
 dispatch, telemetry, and live coordination remain outside this contract.
+Run lifecycle, wake, wait, rearm, Stop, and transport remain outside this
+package as well.
 
 Schema identities are stable and versioned independently of package paths:
 `urn:agent-machinery:schema:routing-request:v2` and

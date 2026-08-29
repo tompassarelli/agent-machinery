@@ -53,19 +53,19 @@
       "name": "team-lead", "taskGrade": "staff", "tier": "senior", "deliberation": "high", "topology": "orchestrator", "posture": "deliver",
       "capabilities": ["filesystem.read", "filesystem.search", "shell.readonly", "web", "coordination"],
       "tagline": "one workstream reconciled into a single evidence-backed result",
-      "description": "Team-lead orchestration — first rung of the scope ladder: coordinate ONE workstream (a bounded tree of directly staffed children) to a single reconciled, evidence-backed result. Sees its own workstream in full and the program above only as constraints. Several workstreams → program; the whole board → portfolio."
+      "description": "Team-lead coordination — first rung of the scope ladder: coordinate ONE workstream (a bounded tree of directly staffed children) to a single reconciled, evidence-backed result. Sees its own workstream in full and the program above only as constraints. Several workstreams → program; the whole board → portfolio."
     },
     {
       "name": "program", "taskGrade": "principal", "tier": "frontier", "deliberation": "xhigh", "topology": "orchestrator", "posture": "deliver",
       "capabilities": ["filesystem.read", "filesystem.search", "shell.readonly", "web", "coordination"],
       "tagline": "several workstreams reconciled into one program outcome, with the cross-workstream seam map",
-      "description": "Program orchestration — middle rung of the scope ladder: coordinate SEVERAL workstreams toward one program goal; owns the seams between workstreams and their sequencing, never any lane's interior. One workstream → team-lead; the whole board → portfolio."
+      "description": "Program coordination — middle rung of the scope ladder: coordinate SEVERAL workstreams toward one program goal; owns the seams between workstreams and their sequencing, never any lane's interior. One workstream → team-lead; the whole board → portfolio."
     },
     {
       "name": "portfolio", "taskGrade": "distinguished", "tier": "frontier", "deliberation": "xhigh", "topology": "orchestrator", "posture": "deliver",
       "capabilities": ["filesystem.read", "filesystem.search", "shell.readonly", "web", "coordination"],
       "tagline": "the board held coherent — programs reconciled into one portfolio outcome",
-      "description": "Portfolio orchestration — top rung of the scope ladder: hold the whole board; coordinate programs, own cross-program seams and priorities, below only a human owner. Reasons in programs and their seams, never lane detail."
+      "description": "Portfolio coordination — top rung of the scope ladder: hold the whole board; coordinate programs, own cross-program seams and priorities, below only a human owner. Reasons in programs and their seams, never lane detail."
     },
     {
       "name": "scout", "taskGrade": "junior", "tier": "economy", "deliberation": "low", "topology": "worker", "posture": "explore",

@@ -86,14 +86,13 @@ export function validateRoutingRequest(value, catalog = loadStaffingCatalog()) {
   stringList(request.domainRequirements, "domainRequirements");
 
   const composition = object(request.composition, "composition");
-  const preset = catalog.presets.find(({ name }) => name === role);
 
   if (composition.kind === "template") {
     keysExactly(composition, composition.overrideReason === undefined
       ? ["kind", "id", "overrides"] : ["kind", "id", "overrides", "overrideReason"], "composition");
-    if (!preset) throw new Error(`unknown role ${role} requires a bespoke composition`);
     const compositionId = canonicalRoleId(composition.id, "composition.id");
-    if (compositionId !== role) throw new Error(`composition.id must match canonical role ${role}`);
+    const preset = catalog.presets.find(({ name }) => name === compositionId);
+    if (!preset) throw new Error(`unknown stock template ${compositionId}`);
     if (request.topology !== preset.topology)
       throw new Error(`stock-template topology is fixed at '${preset.topology}'; use a bespoke composition for '${request.topology}'`);
     const declared = stringList(composition.overrides, "composition.overrides");
@@ -114,9 +113,7 @@ export function validateRoutingRequest(value, catalog = loadStaffingCatalog()) {
       .filter((key) => !Object.hasOwn(composition, key));
     if (unknown.length) throw new Error(`composition has unknown field(s): ${unknown.join(", ")}`);
     if (missing.length) throw new Error(`composition is missing field(s): ${missing.join(", ")}`);
-    if (preset) throw new Error(`known stock-template role ${role} requires composition.kind "template"`);
-    const compositionId = canonicalRoleId(composition.id, "composition.id");
-    if (compositionId !== role) throw new Error(`composition.id must match canonical role ${role}`);
+    canonicalRoleId(composition.id, "composition.id");
     if (composition.nearestTemplate !== undefined) {
       const nearest = canonicalRoleId(composition.nearestTemplate, "composition.nearestTemplate");
       if (!catalog.presets.some(({ name }) => name === nearest))

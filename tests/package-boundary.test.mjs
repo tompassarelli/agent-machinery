@@ -5,19 +5,40 @@ import {
   defaultProjectExposureProfile,
   loadExportCatalog,
   loadStaffingCatalog,
+  validateWorkOwnershipTransition,
   validateRoutingAdmission,
   validateRoutingRequest,
 } from "../index.mjs";
-import { FORBIDDEN_TEXT, validatePackage } from "../scripts/validate.mjs";
+import { FORBIDDEN_TEXT, portableSourceText, validatePackage } from "../scripts/validate.mjs";
 
 test("forbidden provider brands match as real words", () => {
   const brands = [["Open", "AI"], ["Nor", "th"]].map((parts) => parts.join(""));
   for (const brand of brands) assert.equal(FORBIDDEN_TEXT.test(brand), true, brand);
 });
 
+test("typed source permits only its exact language header", () => {
+  const brand = ["Bea", "gle"].join("");
+  const header = `#lang ${brand.toLowerCase()}/js\n`;
+  assert.equal(FORBIDDEN_TEXT.test(portableSourceText("source.bjs", header)), false);
+  assert.equal(
+    FORBIDDEN_TEXT.test(portableSourceText("source.bjs", `${header}const leak = "${brand}";\n`)),
+    true,
+  );
+});
+
+test("package manifest permits only exact typed-authoring commands", () => {
+  const tool = ["Bea", "gle"].join("");
+  const build = `${tool.toLowerCase()} build scripts/work-ownership.bjs scripts/work-ownership.js`;
+  assert.equal(FORBIDDEN_TEXT.test(portableSourceText("package.json", build)), false);
+  assert.equal(
+    FORBIDDEN_TEXT.test(portableSourceText("package.json", `${build}\n"leak":"${tool}"`)),
+    true,
+  );
+});
+
 test("export manifest is a closed provider-neutral package", () => {
   const result = validatePackage();
-  assert.equal(result.units, 31);
+  assert.equal(result.units, 29);
   assert.equal(result.templates, 16);
 });
 
@@ -42,4 +63,24 @@ test("public index resolves declared assets and validators", () => {
   assert.equal(unclassified.engineeringContext, "volatile-owner-controlled-research");
   assert.equal(unclassified.facts.correctness, "exact-bounded-claim");
   assert.deepEqual(unclassified.lifecycleBudget, []);
+});
+
+test("public ownership validator keeps an unacknowledged transfer with its owner", () => {
+  const state = {
+    goal: "deliver-candidate",
+    owner: { kind: "agent-run", id: "run-1" },
+    accountableParent: { kind: "listener-agent", id: "listener-1" },
+    pendingOffer: null,
+  };
+  const transition = {
+    version: "work-ownership-v1",
+    before: structuredClone(state),
+    event: {
+      kind: "transfer",
+      actor: { kind: "agent-run", id: "run-1" },
+      to: { kind: "agent-run", id: "run-2" },
+    },
+    after: structuredClone(state),
+  };
+  assert.equal(validateWorkOwnershipTransition(transition), transition);
 });

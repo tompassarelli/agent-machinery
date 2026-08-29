@@ -436,7 +436,7 @@ its review standard prefers evidence and system health over taste or perfection
 and GitHub models a review as feedback plus an approve/request-changes
 disposition
 ([pull-request reviews](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)).
-Orchestration generalizes the input to one supplied artifact or change and keeps the
+This contract generalizes the input to one supplied artifact or change and keeps the
 role read-only.
 
 ## verifier

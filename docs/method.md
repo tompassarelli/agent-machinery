@@ -10,6 +10,9 @@ when responsibility, deliverable, topology, capabilities, done criteria, or
 report shape differs. Repeated successful bespoke use is evidence for a later
 explicit template change, never automatic promotion.
 
+Template identity is provenance metadata inside `composition`; it is
+independent of the request's role and contributes no ownership or authority.
+
 Generated templates flatten role, grade, topology, posture, capabilities, and
 communication source blocks. They intentionally omit concrete providers,
 models, tools, runtime commands, and model-specific steering. Consumers may

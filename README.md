@@ -11,25 +11,27 @@ its own adapters and enforcement.
 
 ## Package contract
 
-- `catalog.json` is the complete export manifest.
-- `doctrine.md` is the portable routing and topology doctrine.
-- `staffing/catalog.json` defines canonical role IDs, axes, capabilities, and
+- `agent-machinery:catalog.json` is the complete export manifest.
+- `agent-machinery:doctrine.md` is the portable routing and topology doctrine.
+- `agent-machinery:staffing/catalog.json` defines canonical role IDs, axes, capabilities, and
   stock compositions.
-- `contracts/` holds the stable eight-field routing request and
-  minimum-sufficient selection sidecar.
+- `agent-machinery:contracts/` holds acknowledged work-ownership transitions, the stable
+  eight-field routing request, and the minimum-sufficient selection sidecar.
 - Raw JSON Schemas check structure only; the catalog-advertised
   `validateContract` export performs required structural and semantic checks.
-- `docs/` holds the source blocks used by `scripts/build-agents.mjs`.
-- `agents/` is generated provider-neutral template output.
-- `staffing/SKILL.md` and `skills/*/SKILL.md` are standard skills.
+- `agent-machinery:docs/` holds the source blocks used by
+  `agent-machinery:scripts/build-agents.mjs`.
+- `agent-machinery:agents/` is generated provider-neutral template output.
+- `agent-machinery:skills/` holds work-ownership, agent-run-design, and
+  engineering workflows.
 
 ```sh
-npm test
-npm run check
+bun test
+bun run check
 ```
 
 Consumers should resolve assets through the manifest or the exports from
-`index.mjs`; no path outside this package is an authority.
+`agent-machinery:index.mjs`; no path outside this package is an authority.
 
 ## License
 

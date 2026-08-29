@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 import { loadStaffingCatalog } from "./staffing-catalog.mjs";
 import { readFileSync } from "node:fs";
 import { templateOverrides, validateRoutingAdmission } from "./routing-request.mjs";
@@ -6,7 +6,7 @@ import { defaultProjectExposureProfile, validateProjectExposureProfile } from ".
 import { canonicalRoleId } from "./role-id.mjs";
 import { assertAssessmentSelection, validateSelectionAssessment } from "./selection-assessment.mjs";
 
-const usage = `usage: node scripts/compose-routing.mjs <role> [options]
+const usage = `usage: agent-machinery-compose-routing <role> [options]
 
 Routing options:
   --task-grade <grade>      novice|junior|mid|senior|staff|principal|distinguished
@@ -15,8 +15,9 @@ Routing options:
   --tier <tier>             economy|standard|senior|frontier
   --deliberation <level>    low|medium|high|xhigh|max (--reasoning is equivalent)
   --posture <posture>       explore|deliver|preserve|prune|evaluate
+  --template <template>     stock template identity; may differ from <role>
   --nearest <template>      optional stock-template reference/defaults for a bespoke composition
-  --rationale <reason>      required when <role> is not a stock template
+  --rationale <reason>      required when no stock template is selected
   --contract <JSON|@file>   bespoke authority/deliverable/done contract
   --assessment <JSON|@file> minimum-sufficient-v1 selection sidecar
   --project-profile <JSON|@file>
@@ -30,8 +31,8 @@ Without --nearest, a bespoke composition must explicitly set --task-grade,
 --topology, --tier, --deliberation/--reasoning, and --posture. Domain
 requirements remain an explicit empty list when no --domain is supplied.
 
-Prints one provider-neutral ORCHESTRATION_ROUTING JSON payload. Machine output retains
-the v2 keys kind:"template" and nearestTemplate .`;
+Prints one provider-neutral AGENT_RUN_ROUTING JSON payload. Machine output retains
+the routing-request-v2 keys kind:"template" and nearestTemplate.`;
 
 function die(message) { console.error(message); console.error(usage); process.exit(1); }
 
@@ -46,7 +47,7 @@ function argumentsOf(argv) {
   const names = {
     "--taskGrade": "taskGrade", "--task-grade": "taskGrade", "--domain": "domain",
     "--topology": "topology", "--tier": "tier", "--deliberation": "deliberation", "--reasoning": "deliberation",
-    "--posture": "posture", "--nearest": "nearest", "--rationale": "rationale",
+    "--posture": "posture", "--template": "template", "--nearest": "nearest", "--rationale": "rationale",
     "--contract": "contract", "--assessment": "assessment", "--project-profile": "projectProfile",
     "--override-reason": "overrideReason",
     "--promotion-candidate": "promotionCandidate", "--no-promotion-candidate": "noPromotionCandidate",
@@ -77,7 +78,11 @@ const projectProfile = args.projectProfile
 try { canonicalRoleId(args.role, "role"); }
 catch (error) { die(error.message); }
 const canonicalRole = args.role;
-const preset = catalog.presets.find(({ name }) => name === canonicalRole);
+const implicitTemplate = catalog.presets.find(({ name }) => name === canonicalRole);
+const preset = args.template
+  ? catalog.presets.find(({ name }) => name === args.template)
+  : implicitTemplate;
+if (args.template && !preset) die(`unknown stock template: ${args.template}`);
 const nearest = args.nearest && catalog.presets.find(({ name }) => name === args.nearest);
 if (args.nearest && !nearest) die(`unknown nearest stock template: ${args.nearest}`);
 if (preset && (args.nearest || args.rationale || args.contract || args.promotionSpecified))
@@ -149,7 +154,7 @@ const payload = {
   posture: selected.posture,
   reasoning: selected.deliberation,
   composition: preset
-    ? { kind: "template", id: canonicalRole, overrides: [] }
+    ? { kind: "template", id: preset.name, overrides: [] }
     : {
         kind: "bespoke", id: args.role,
         ...(nearest ? { nearestTemplate: nearest.name } : {}),

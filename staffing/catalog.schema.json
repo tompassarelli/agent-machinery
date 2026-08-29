@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:agent-machinery:schema:staffing-catalog:v2",
-  "title": "Orchestration staffing catalog",
+  "title": "Agent-run template catalog",
   "description": "Structural shape only. Use the catalog-advertised validateContract export for normative structural and semantic validation.",
   "type": "object",
   "additionalProperties": false,

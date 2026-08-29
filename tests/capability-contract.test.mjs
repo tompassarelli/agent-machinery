@@ -5,9 +5,11 @@ import {
   AGENT_SOURCE_PATHS,
   CATALOG_SCHEMA_ID,
   PROJECT_EXPOSURE_PROFILE_SCHEMA_ID,
+  ROUTING_FIELDS,
   ROUTING_REQUEST_SCHEMA_ID,
   SELECTION_ASSESSMENT_SCHEMA_ID,
   STAFFING_CATALOG_SCHEMA_ID,
+  WORK_OWNERSHIP_SCHEMA_ID,
   effectiveCapabilities,
   effectiveFilesystemAuthority,
   loadExportCatalog,
@@ -24,6 +26,7 @@ test("catalog assets and contracts bind stable versioned IDs to shipped schemas"
   const expected = [
     CATALOG_SCHEMA_ID,
     PROJECT_EXPOSURE_PROFILE_SCHEMA_ID,
+    WORK_OWNERSHIP_SCHEMA_ID,
     STAFFING_CATALOG_SCHEMA_ID,
     ROUTING_REQUEST_SCHEMA_ID,
     SELECTION_ASSESSMENT_SCHEMA_ID,
@@ -36,14 +39,37 @@ test("catalog assets and contracts bind stable versioned IDs to shipped schemas"
   assert.deepEqual(
     catalog.units.filter(({ kind }) => kind === "module").map(({ id, members }) => [id, members]),
     [
-      ["agent-machinery", ["orchestration", "agent-practice"]],
-      ["orchestration", ["staffing-distilled", "compose-distilled"]],
+      ["agent-machinery", ["work-ownership-distilled", "agent-run-design-distilled", "agent-practice"]],
       ["agent-practice", ["build-vs-reuse-distilled", "external-code-distilled", "greenfield-distilled", "planning-distilled", "prior-art-distilled", "production-hardening-distilled", "program-craftsmanship-distilled", "program-stewardship-distilled", "rust-development-distilled", "skill-maintenance-distilled", "terse-distilled", "verification-distilled"]],
     ],
   );
   for (const id of expected) {
     const schema = JSON.parse(readFileSync(schemaPath(id), "utf8"));
     assert.equal(schema.$id, id);
+  }
+});
+
+test("routing ABI remains exactly eight fields while template identity differs from role", () => {
+  assert.deepEqual(ROUTING_FIELDS, [
+    "role", "taskGrade", "domainRequirements", "topology", "tier", "reasoning", "posture", "composition",
+  ]);
+  const request = {
+    role: "agent-machinery-integration-owner",
+    taskGrade: "senior",
+    domainRequirements: [],
+    topology: "worker",
+    tier: "senior",
+    reasoning: "high",
+    posture: "deliver",
+    composition: { kind: "template", id: "integrator", overrides: [] },
+  };
+  assert.equal(validateRoutingRequest(request), request);
+  assert.notEqual(request.role, request.composition.id);
+  for (const field of ["model", "provider", "account", "actor", "runtime"]) {
+    assert.throws(
+      () => validateRoutingRequest({ ...request, [field]: "consumer-owned" }),
+      new RegExp(`routing request has unknown field\\(s\\): ${field}`),
+    );
   }
 });
 

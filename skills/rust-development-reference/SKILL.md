@@ -36,7 +36,7 @@ let records = lines
 ## Errors, async, and unsafe details
 
 Follow the repository's error stack. Reusable boundaries commonly expose typed
-errors; application orchestration may use contextual erased errors. Add neither
+errors; application coordination may use contextual erased errors. Add neither
 `thiserror` nor `anyhow` reflexively. `expect` is suitable only in tests or for
 a locally proven invariant and should explain why failure is impossible.
 Document intentional best-effort suppression.

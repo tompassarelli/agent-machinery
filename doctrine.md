@@ -1,4 +1,4 @@
-ORCHESTRATION ACTIVE — provider-independent routing doctrine for delegated work.
+AGENT MACHINERY ACTIVE — provider-independent work ownership and run-design doctrine.
 
 ## Actor and authority ontology
 
@@ -10,13 +10,27 @@ ORCHESTRATION ACTIVE — provider-independent routing doctrine for delegated wor
 - A **concrete agent run** is one admitted execution instance with a role,
   brief, topology, capabilities, and supervisor. It is an intentional actor
   within that contract. Its run identity is not a durable identity.
-- Providers, models, accounts, adapters, packages, units, catalogs, paths,
-  hooks, processes, and other resources or source authorities are not actors.
-  They may constrain, carry, or enforce authority but do not possess intent.
+- Roles, templates, providers, models, accounts, runtimes, adapters, packages,
+  units, catalogs, paths, hooks, processes, and other resources or source
+  authorities are not actors or owners. They may constrain, carry, or enforce
+  authority but do not possess intent.
+
+## Keep work ownership acknowledged
+
+The human owns the goal. The listener owns reconciliation and remains
+accountable for every direct child it admits. A concrete run owns work only
+after it accepts an offer or acknowledges a direct transfer. An offer or
+unacknowledged transfer leaves ownership unchanged; refusal and escalation do
+not change the owner or goal. Acceptance retains the previous owner as the
+accountable parent, and results return through that immediate parent.
+
+Use the catalogued `work-ownership-v1` contract for machine-checked offer,
+acceptance, transfer, refusal, and escalation transitions. Ownership never
+widens the accepted routing request or topology.
 
 ## Admit project exposure before routing
 
-Before planning, orchestration, verification, hardening, release, or
+Before planning, coordination, verification, hardening, release, or
 provenance/immutability work, resolve and validate the scoped
 `project-exposure-v1` sidecar. It binds resolved engineering context and the
 lifecycle budget without adding a ninth routing field. Missing facts resolve to
@@ -43,7 +57,9 @@ A stock template is a behavior contract plus a fixed topology/capability
 boundary. Use it unchanged when responsibility and authority fit. A justified
 override may change task grade, domains, tier, reasoning, or posture. A change
 to topology, responsibility, deliverable, capabilities, done criteria, or
-report shape requires a bespoke composition.
+report shape requires a bespoke composition. The template ID is provenance
+metadata inside `composition`; it may differ from `role` and grants no
+ownership or authority.
 
 ## Shape map
 
@@ -118,6 +134,8 @@ Every run carries exactly eight routing fields:
 
 Provider, model, account, allocation, dispatch syntax, runtime identity, and
 coordination state are consumer-owned execution facts, never routing fields.
+Run lifecycle, wake, wait, rearm, Stop, and transport are also consumer-owned
+and remain outside Agent Machinery.
 The raw JSON Schemas classify structural shape only. The `validateContract`
 export advertised by `catalog.json` composes that structural check with the
 package's semantic validator and is the normative machine contract.

@@ -2,7 +2,7 @@
 
 Topology is conceptually independent of role, grade, tier, reasoning, and
 posture. It says whether an agent owns one terminal piece or owns decomposition
-and reduction. Orchestration's current stock templates deliberately ship fixed,
+and reduction. Current stock templates deliberately ship fixed,
 enforceable topology/capability pairings: the orchestrator seats — director and
 the team-lead → program → portfolio scope ladder — carry coordination
 authority; every other stock template is a worker without it. Use a bespoke
@@ -41,7 +41,7 @@ yourself. Decompose on real independence and classify every direct child from
 its LOCAL dependency shape. Staff an atomic or tightly coupled child as a
 worker; when a child itself needs dynamic decomposition, staff it as a child
 orchestrator through the consumer's admission boundary. Every child receives a
-fresh complete Orchestration request and consumer admission; never inherit the
+fresh complete Agent Machinery request and consumer admission; never inherit the
 parent's route by nesting. Require an explicit outcome and own reduction of
 every DIRECT child.
 A child orchestrator reduces its descendants before returning its reconciled

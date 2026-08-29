@@ -35,6 +35,11 @@ export {
   validateRoutingRequest,
 } from "./scripts/routing-request.mjs";
 export {
+  WORK_OWNERSHIP_SCHEMA_ID,
+  WORK_OWNERSHIP_VERSION,
+  validateWorkOwnershipTransition,
+} from "./scripts/work-ownership.mjs";
+export {
   EXCEPTION_CODES,
   REASONING_LEVELS,
   SELECTION_ASSESSMENT_SCHEMA_ID,

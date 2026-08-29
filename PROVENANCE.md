@@ -4,7 +4,7 @@ This package was extracted and provider-neutralized from these public source
 revisions:
 
 - `https://github.com/tompassarelli/north.git` at
-  `d538eb98c360e8bd40d2d6952ece10aa9a9af175`: orchestration doctrine, role
+  `d538eb98c360e8bd40d2d6952ece10aa9a9af175`: coordination doctrine, role
   contracts, routing schemas and validators, staffing catalog, and portable
   procedures other than the uncleared payload-derived procedures listed below.
 - `https://github.com/tompassarelli/firn.git` at

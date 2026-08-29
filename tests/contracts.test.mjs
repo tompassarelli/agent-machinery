@@ -15,6 +15,11 @@ const cases = [
     value: (item) => item.profile,
   },
   {
+    id: "work-ownership-v1",
+    fixture: readJson("contracts/work-ownership.fixtures.json"),
+    value: (item) => item.transition,
+  },
+  {
     id: "routing-request-v2",
     fixture: readJson("contracts/routing-request.fixtures.json"),
     value: (item) => item.request,

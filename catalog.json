@@ -7,13 +7,11 @@
     "license": "MIT OR Apache-2.0"
   },
   "units": [
-    {"id":"agent-machinery","kind":"module","source":"catalog.json","members":["orchestration","agent-practice"]},
-    {"id":"orchestration","kind":"module","source":"doctrine.md","members":["staffing-distilled","compose-distilled"]},
+    {"id":"agent-machinery","kind":"module","source":"catalog.json","members":["work-ownership-distilled","agent-run-design-distilled","agent-practice"]},
     {"id":"agent-practice","kind":"module","source":"catalog.json","members":["build-vs-reuse-distilled","external-code-distilled","greenfield-distilled","planning-distilled","prior-art-distilled","production-hardening-distilled","program-craftsmanship-distilled","program-stewardship-distilled","rust-development-distilled","skill-maintenance-distilled","terse-distilled","verification-distilled"]},
-    {"id":"staffing-distilled","kind":"skill","source":"skills/staffing-distilled/SKILL.md"},
-    {"id":"staffing-reference","kind":"skill","source":"skills/staffing-reference/SKILL.md"},
-    {"id":"compose-distilled","kind":"skill","source":"skills/compose-distilled/SKILL.md"},
-    {"id":"compose-reference","kind":"skill","source":"skills/compose-reference/SKILL.md"},
+    {"id":"work-ownership-distilled","kind":"skill","source":"skills/work-ownership-distilled/SKILL.md"},
+    {"id":"agent-run-design-distilled","kind":"skill","source":"skills/agent-run-design-distilled/SKILL.md"},
+    {"id":"agent-run-design-reference","kind":"skill","source":"skills/agent-run-design-reference/SKILL.md"},
     {"id":"build-vs-reuse-distilled","kind":"skill","source":"skills/build-vs-reuse-distilled/SKILL.md"},
     {"id":"build-vs-reuse-reference","kind":"skill","source":"skills/build-vs-reuse-reference/SKILL.md"},
     {"id":"external-code-distilled","kind":"skill","source":"skills/external-code-distilled/SKILL.md"},
@@ -40,7 +38,7 @@
     {"id":"verification-reference","kind":"skill","source":"skills/verification-reference/SKILL.md"}
   ],
   "assets": [
-    {"id":"orchestration-doctrine","type":"instructions","path":"doctrine.md"},
+    {"id":"agent-machinery-doctrine","type":"instructions","path":"doctrine.md"},
     {"id":"staffing-catalog","type":"catalog","path":"staffing/catalog.json"},
     {"id":"agent-templates","type":"generated-templates","path":"agents"},
     {"id":"role-contracts","type":"source-blocks","path":"docs/roles.md"},
@@ -56,6 +54,7 @@
   ],
   "contracts": [
     {"id":"project-exposure-v1","schema":"contracts/project-exposure-profile.schema.json","schemaScope":"structural","fixtures":"contracts/project-exposure-profile.fixtures.json","validator":"validateContract"},
+    {"id":"work-ownership-v1","schema":"contracts/work-ownership.schema.json","schemaScope":"structural","fixtures":"contracts/work-ownership.fixtures.json","validator":"validateContract"},
     {"id":"routing-request-v2","schema":"contracts/routing-request.schema.json","schemaScope":"structural","fixtures":"contracts/routing-request.fixtures.json","validator":"validateContract"},
     {"id":"minimum-sufficient-v1","schema":"contracts/selection-assessment.schema.json","schemaScope":"structural","fixtures":"contracts/selection-assessment.fixtures.json","validator":"validateContract"},
     {"id":"staffing-catalog-v2","schema":"staffing/catalog.schema.json","schemaScope":"structural","fixtures":"staffing/catalog.fixtures.json","validator":"validateContract"}

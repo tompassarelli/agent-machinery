@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:agent-machinery:schema:routing-request:v2",
-  "title": "Orchestration provider-neutral routing request",
+  "title": "Agent-run provider-neutral routing request",
   "description": "Structural shape only. Use the catalog-advertised validateContract export for normative structural and semantic validation.",
   "type": "object",
   "additionalProperties": false,
@@ -21,6 +21,7 @@
     "reasoning": { "enum": ["low", "medium", "high", "xhigh", "max"] },
     "posture": { "enum": ["explore", "deliver", "preserve", "prune", "evaluate"] },
     "composition": {
+      "description": "Behavior contract and template provenance. A composition ID is independent of role and is not a ninth routing field.",
       "oneOf": [
         { "$ref": "#/$defs/templateComposition" },
         { "$ref": "#/$defs/bespokeComposition" }
