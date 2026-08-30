@@ -8,6 +8,13 @@ description: >-
 
 # Verification
 
+Verification requires an action fork. Before a check, name internally:
+`pass -> A; fail -> B`. If A and B are the same immediate action, do not run the
+check. Evidence is not a second deliverable unless the operator requested it or
+a named external boundary requires it. Verification consumes at most one
+decision node on the current shortest-path DAG; it never creates a parallel
+assurance path.
+
 Start from the internally resolved `project-exposure-v1` profile. When no
 profile or concrete exposure facts are supplied, silently use the validated
 volatile owner-controlled research default; record no profile artifact,
@@ -24,6 +31,14 @@ weakening evidence. At 2x
 expectation stop, preserve, classify, and reprice before retry/timeout change.
 Never retry into proof.
 
+The nearest existing relevant check is the default and is sufficient when it
+passes. Do not add an auditor, reviewer, verifier, independent reproduction,
+broader suite, attestation, provenance exercise, or second end-to-end journey
+to confirm ordinary owner judgment. A passed decision-changing check closes the
+decision. Report unobserved dimensions as residual uncertainty; do not turn
+them into work. A smoke check is a cheap falsification attempt, never a back
+door to broader assurance.
+
 Use the lowest deterministic layer and narrowest profile; never silently
 escalate. Control verdict-sensitive inputs only. Require provenance only when
 producer substitution changes the decision; identity gaps block only consumers.
@@ -32,6 +47,12 @@ Measure directly first. Build a harness only for a named missing observation,
 bounded to one planned run; after its second defect/exhausted budget, simplify
 or report the gap. Reproduce once, assign, fix, and regress once; non-product
 failure stays diagnostic.
+
+A harness or launch-environment failure does not falsify the product. Use an
+already-sanctioned direct route when immediately available; otherwise report
+the evidence gap. Do not start infrastructure, Store, daemon, subscription,
+observability, recovery, or hermetic-sealing work merely to increase confidence
+in an artifact whose delivery decision is already resolved.
 
 Batch before expensive checks; one supervisor owns/reaps each run. Reject
 reflexive suites, inflated oracles/attestation, excess isolation/compatibility,

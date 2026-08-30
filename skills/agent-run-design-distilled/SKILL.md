@@ -13,6 +13,20 @@ intentional actor owns a piece of work; run design determines the portable
 contract for a run that may accept it. Choosing a role, template, or provider
 does not transfer ownership.
 
+Before composing a run, require one of two facts: it directly produces part of
+the requested artifact, or its result changes the immediate next action. Name
+the action fork internally. If every possible result leads to the same action,
+do not compose or admit the run. Uncertainty, confidence, completeness,
+possible usefulness, idle capacity, and independent confirmation are not work.
+
+During delivery, keep one shortest-path DAG. Parallelize only independent
+artifact-producing nodes already on it. Do not compose read-only shadow roles
+to watch, audit, resnapshot, review, verify, inventory, collect status, census
+processes, or supervise another supervisor. Those roles require an explicit
+informational or assurance deliverable, or a named external boundary whose
+answer changes the immediate delivery decision. Observe direct children
+directly and keep tightly coupled work with one owner.
+
 Read `agent-machinery:doctrine.md`, `agent-machinery:staffing/catalog.json`,
 and `agent-machinery:docs/routing.md`. Resolve `project-exposure-v1`, classify
 the role and every other route axis independently, then use a stock template

@@ -9,6 +9,11 @@ description: >-
 
 # Engineering planning
 
+Planning is not admitted merely because code has architecture, data, an API, or
+dependencies. For owner-controlled research, those are ordinary implementation
+details until a concrete fact makes a decision costly to reverse. If the method
+and nearest check are clear, execute; do not manufacture a planning deliverable.
+
 Start from the internally resolved `project-exposure-v1` profile. When no
 profile or concrete exposure facts are supplied, silently use the validated
 volatile owner-controlled research default; record no profile artifact,

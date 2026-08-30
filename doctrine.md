@@ -64,6 +64,49 @@ report shape requires a bespoke composition. The template ID is provenance
 metadata inside `composition`; it may differ from `role` and grants no
 ownership or authority.
 
+## Admit only useful work
+
+For fast owner-controlled research, optimize for the shortest useful artifact
+and an 80/20 stopping point. Test the thesis quickly and reasonably, not
+conclusively. Hypothetical bugs, exotic misuse, adversarial edge cases, and
+guarantees without a named consumer are outside the default goal.
+
+Quality is not one ladder. Budget changeability, claim correctness, robustness,
+security, operations, and assurance independently. Escalating one axis requires
+a named consumer or boundary, plausible failure mode, material consequence, and
+the smallest mechanism that changes the decision. A missing fact means no
+escalation, and one escalated axis never raises another. Internal clarity earns
+investment when it lowers current change cost; speculative abstractions and
+unconsumed external guarantees do not.
+
+An exposure or lifecycle budget is a ceiling, never a checklist. Eligibility
+permits a mechanism; it does not create work. Public source, a CLI, a Store, a
+daemon, a long-running process, durable local data, or hypothetical future users
+do not by themselves establish production or external dependence. Admit a
+mechanism only when the requested artifact needs it at the exact exposed seam
+and its result passes the action-fork test below.
+
+For a delivery request, admit a run only when it directly produces part of the
+requested artifact or its result changes the immediate next action. The
+accountable parent must be able to name that action fork before admission. If
+every result leads to the same action, the run is ceremony and is not admitted.
+Uncertainty, confidence, completeness, observability, possible usefulness, idle
+capacity, and a desire for independent confirmation are not admission facts.
+
+Keep one shortest-path DAG. Parallelize only independent artifact-producing
+pieces already on it. Never delegate observation of delegation. Read-only roles
+do not shadow active delivery: no scout, analyst, guardian, reviewer, verifier,
+judge, watchdog, status collector, inventory, process census, or second
+coordinator may watch, resnapshot, cross-check, or endorse ordinary
+implementation. Such work requires an explicit informational or assurance
+deliverable, or a named external boundary whose answer changes the immediate
+delivery decision.
+
+Keep tightly coupled work with one sufficiently capable owner rather than
+subdividing it for utilization, visibility, or role coverage. Once the artifact
+and its nearest decision-changing check exist, close delivery and report
+residual uncertainty instead of manufacturing more work.
+
 ## Shape map
 
 - bounded mechanical change → `executor`
@@ -96,8 +139,9 @@ ownership or authority.
 3. **Quality floor.** Resource pressure may trim optional breadth, polish, and
    retries; it never silently lowers the minimum responsible route.
 4. **Blast radius routes up; importance alone does not.**
-5. **Delegate when it buys delivery.** File count is not a trigger. Parallelize
-   genuinely independent work whose saved time exceeds integration cost.
+5. **Delegate only the shortest path.** File count and idle capacity are not
+   triggers. Parallelize genuinely independent artifact-producing work already
+   required for delivery, and only when saved time exceeds integration cost.
 6. **Owner judgment closes delivery.** A worker runs the nearest existing
    relevant check once, fixes relevant failures, reports the observation and
    residual uncertainty, then stops. A coordinator owns reconciliation and may
