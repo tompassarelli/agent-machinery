@@ -22,6 +22,16 @@ The provider-independent routing request has exactly eight fields:
 | `posture` | Value-collision ordering |
 | `composition` | Stock template or complete bespoke contract, including composition provenance |
 
+Tier and reasoning are orthogonal. `tier` is the provider-independent
+capability floor and `reasoning` is the deliberation budget; no value on one
+axis supplies a default or normalization for the other. Every vocabulary pair
+that satisfies the applicable minimum floor is valid, including
+`economy` + `high`, `economy` + `xhigh`, and `economy` + `max`. Consumers must
+preserve an explicit pair rather than replacing it with a stock-template
+default. A selection assessment may impose a minimum reasoning floor as an
+explicit safety rule, but that floor does not couple or rewrite the selected
+axis.
+
 Stock templates have fixed topology and capabilities. `composition.id` names
 the template and may differ from `role`; that identity is nested provenance
 metadata, not ownership, authority, or a ninth field. Overrides may change task

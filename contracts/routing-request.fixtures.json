@@ -10,6 +10,17 @@
       }
     },
     {
+      "name": "economy tier preserves an explicit xhigh reasoning override",
+      "request": {
+        "role": "executor", "taskGrade": "novice", "domainRequirements": [],
+        "topology": "worker", "tier": "economy", "reasoning": "xhigh", "posture": "deliver",
+        "composition": {
+          "kind": "template", "id": "executor", "overrides": ["reasoning"],
+          "overrideReason": "the bounded work needs deeper deliberation while retaining the economy semantic floor"
+        }
+      }
+    },
+    {
       "name": "stock template identity is independent of role",
       "request": {
         "role": "agent-machinery-integration-owner", "taskGrade": "senior", "domainRequirements": [],

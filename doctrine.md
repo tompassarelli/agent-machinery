@@ -64,6 +64,16 @@ report shape requires a bespoke composition. The template ID is provenance
 metadata inside `composition`; it may differ from `role` and grants no
 ownership or authority.
 
+`tier` and `reasoning` are independent routing axes. Tier names the
+provider-independent semantic capability floor; reasoning names the
+deliberation budget. Do not infer, normalize, or reject one from the other
+solely because their values differ. In particular, an economy tier may carry
+high, xhigh, or max reasoning when the brief calls for it. A stock template's
+pair is only a default; an explicit override remains part of the portable
+request and consumers must preserve it. Any minimum floor derived by a
+selection assessment is an explicit safety rule, not a replacement for the
+selected reasoning value.
+
 ## Admit only useful work
 
 For fast owner-controlled research, optimize for the shortest useful artifact
