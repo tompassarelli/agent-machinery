@@ -169,6 +169,18 @@ implementation. Every child receives its own complete routing request,
 capability boundary and supervisor. Outputs return to the
 immediate parent; no flat fan-in bypasses an intermediate orchestrator.
 
+Supervisor responsibility applies to every orchestrator and to a listener or
+run explicitly assigned a supervisor, root-supervisor, or foreman role. It is
+not a ninth routing field, a new task species, or a durable owner identity. A
+supervisor admits only shortest-path children, keeps each offer or transfer
+with its required acknowledgement, remains accountable for every direct child,
+consumes every returned result, and does not report a reconciled outcome while
+any direct child remains live or unsettled. An explicit operator pause or end,
+or an acknowledged transfer of the outstanding responsibility, may end that
+supervision interval without silently settling the child. Concrete wait, wake,
+transport, recurrence, telemetry, and settlement mechanisms remain
+consumer-owned execution facts.
+
 Choose topology from dependency shape:
 
 - atomic and cohesive → one worker;
