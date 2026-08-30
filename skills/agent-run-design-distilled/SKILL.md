@@ -1,9 +1,10 @@
 ---
 name: agent-run-design-distilled
 description: >-
-  Design the provider-independent run side of delegation from a role, portable
-  execution requirements, and a stock or bespoke composition. Use before a
-  concrete run is admitted, including when no stock template fits.
+  Design the portable run side of delegation from a role, execution
+  requirements, and a stock or bespoke composition, then resolve its ranked
+  provider/model/effort plan from live inventory. Use before a concrete run is
+  admitted, including when no stock template fits.
 ---
 
 # Agent run design
@@ -34,16 +35,18 @@ only when its complete behavior and authority contract fits. Otherwise create
 a bespoke composition. Never lower a capability floor or admit authority the
 consumer cannot enforce.
 
-Emit exactly `role`, `taskGrade`, `domainRequirements`, `topology`, `tier`,
-`reasoning`, `posture`, and `composition`. A template ID is provenance metadata
+Emit exactly `role`, `taskGrade`, `domainRequirements`, `topology`,
+`capabilityFloor`, `serviceClass`, `reasoning`, `posture`, and `composition`.
+A template ID is provenance metadata
 inside `composition` and need not equal `role`; it grants neither ownership nor
 runtime access. A worker remains terminal even when its brief reveals useful
 decomposition and must escalate that signal to its immediate parent.
 
-Return the eight fields, canonical capabilities, supplied domain context, and
+Return the nine fields, canonical capabilities, supplied domain context, and
 reasons for overrides or bespoke boundaries. Run lifecycle, wake, wait, rearm,
-Stop, transport, concrete provider/model/account selection, and runtime access
-mapping remain consumer responsibilities outside Agent Machinery.
+Stop, transport, account/lease selection, and runtime access mapping remain
+consumer responsibilities. Agent Machinery resolves the provider/model/effort
+plan from its catalog, empirical evidence, and the consumer's live inventory.
 
 For the comparison worksheet and CLI handoff, run
 `agents path agent-run-design-reference` and read its `SKILL.md` completely.

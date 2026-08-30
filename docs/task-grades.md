@@ -2,13 +2,14 @@
 
 Task grade describes the work contract, not the worker's identity and not a
 model selection. A higher grade usually widens autonomy, novelty, and
-integration responsibility; semantic tier is chosen separately.
+integration responsibility; capability floor, service class, and reasoning are
+chosen separately.
 
 The ladder reads as TWO SEGMENTS on different axes, not one line of "smarter":
 
 - IC / CAPABILITY (novice → junior → mid → senior). Senior is the terminal
   individual-contributor rung. This segment is the horsepower a task demands,
-  and it drives semantic tier and effort — a harder terminal piece routes
+  and it drives capability floor and reasoning — a harder terminal piece routes
   higher on this segment.
 - SCOPE / INFLUENCE (staff → principal → distinguished). This segment is the
   organizational breadth and reduction complexity of the work contract, NOT

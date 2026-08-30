@@ -13,7 +13,8 @@ description: >-
 Compare a stock template across responsibility, deliverable, topology,
 capabilities, decision authority, escalation conditions, done criteria, and
 report shape. A mismatch in any of those requires a bespoke composition.
-Override only task grade, domain requirements, tier, reasoning, or posture and
+Override only task grade, domain requirements, capability floor, service
+class, reasoning, or posture and
 record the exact changed fields plus one reason.
 
 Template identity and role are independent. `composition.id` names the stock
@@ -25,7 +26,7 @@ adds capabilities, decomposition authority, ownership, or access.
 
 Record a stable composition ID; role; responsibility and deliverable; task
 grade; domain requirements and supplied context; worker or orchestrator
-topology; tier and reasoning; posture; canonical capabilities; permitted
+topology; capability floor, service class, and reasoning; posture; canonical capabilities; permitted
 decisions; escalation conditions; observable done criteria; and report shape.
 A nearest template may seed values but contributes no authority.
 
@@ -35,4 +36,4 @@ Generate the request with `agent-machinery-compose-routing ROLE`. Validate it
 through the catalog-advertised `validateContract` export and admit it only
 after the consumer maps every capability fail-closed. Keep template provenance
 within `composition`; keep lifecycle and concrete execution facts outside the
-eight portable fields.
+nine portable fields.

@@ -41,16 +41,24 @@ export {
 } from "./scripts/work-ownership.mjs";
 export {
   EXCEPTION_CODES,
+  CAPABILITY_FLOORS,
   REASONING_LEVELS,
   SELECTION_ASSESSMENT_SCHEMA_ID,
   SELECTION_ASSESSMENT_VERSION,
   SIGNAL_VALUES,
-  TIERS,
   assertAssessmentSelection,
   deriveSelectionAssessment,
   validateSelectionAssessment,
   validateSelectionSignals,
 } from "./scripts/selection-assessment.mjs";
+export {
+  MODEL_SELECTION_CATALOG_PATH,
+  MODEL_SELECTION_CATALOG_SCHEMA_ID,
+  MODEL_SELECTION_PLAN_VERSION,
+  loadModelSelectionCatalog,
+  resolveExecutionPlan,
+  validateModelSelectionCatalog,
+} from "./scripts/model-selection.mjs";
 export { validateContract } from "./scripts/contracts.mjs";
 export { AGENT_SOURCE_PATHS, buildAgents, renderAgent } from "./scripts/build-agents.mjs";
 

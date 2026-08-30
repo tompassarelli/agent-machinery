@@ -1,5 +1,5 @@
-export const SELECTION_ASSESSMENT_VERSION = "minimum-sufficient-v1";
-export const SELECTION_ASSESSMENT_SCHEMA_ID = "urn:agent-machinery:schema:selection-assessment:v1";
+export const SELECTION_ASSESSMENT_VERSION = "minimum-sufficient-v2";
+export const SELECTION_ASSESSMENT_SCHEMA_ID = "urn:agent-machinery:schema:selection-assessment:v2";
 
 export const SIGNAL_VALUES = Object.freeze({
   decisionOwnership: ["none", "bounded", "cross-boundary", "system-shaping", "open-solution-class"],
@@ -13,51 +13,44 @@ export const SIGNAL_VALUES = Object.freeze({
 
 export const EXCEPTION_CODES = Object.freeze([
   "explicit-human-floor",
-  "recent-lower-tier-failure",
+  "recent-lower-capability-failure",
   "calibration-experiment",
   "unmodeled-risk",
 ]);
 
-export const TIERS = Object.freeze(["economy", "standard", "senior", "frontier"]);
+export const CAPABILITY_FLOORS = Object.freeze(["baseline", "standard", "advanced", "frontier"]);
 export const REASONING_LEVELS = Object.freeze(["low", "medium", "high", "xhigh", "max"]);
-
-const TIER_MINIMUM_REASONING = Object.freeze({
-  economy: "low",
-  standard: "medium",
-  senior: "high",
-  frontier: "xhigh",
-});
 
 const DECISION_ROUTE = Object.freeze({
   bounded: ["standard", "medium"],
-  "cross-boundary": ["senior", "high"],
+  "cross-boundary": ["advanced", "high"],
   "system-shaping": ["frontier", "xhigh"],
   "open-solution-class": ["frontier", "xhigh"],
 });
 const SEAM_ROUTE = Object.freeze({
   established: ["standard", "medium"],
-  consequential: ["senior", "high"],
+  consequential: ["advanced", "high"],
   "system-wide": ["frontier", "xhigh"],
 });
 const ERROR_ROUTE = Object.freeze({
   "material-recoverable": ["standard", "medium"],
-  "high-or-hard-to-reverse": ["senior", "high"],
+  "high-or-hard-to-reverse": ["advanced", "high"],
 });
 const ORACLE_ROUTE = Object.freeze({
-  partial: ["senior", "high"],
-  "judgment-only": ["senior", "high"],
+  partial: ["advanced", "high"],
+  "judgment-only": ["advanced", "high"],
 });
 const FOUNDATIONAL_ROUTE = Object.freeze({
-  "invariant-decision-owned": ["senior", "high"],
+  "invariant-decision-owned": ["advanced", "high"],
 });
 const DEPENDENCY_ROUTE = Object.freeze({
   "parallel-breadth": ["standard", "medium"],
   "dynamic-decomposition": ["frontier", "xhigh"],
-  "tightly-coupled-sequential": ["senior", "high"],
+  "tightly-coupled-sequential": ["advanced", "high"],
 });
 const REASONING_ROUTE = Object.freeze({
   "bounded-branching": ["standard", "medium"],
-  "multi-hypothesis": ["senior", "high"],
+  "multi-hypothesis": ["advanced", "high"],
   "system-synthesis": ["frontier", "xhigh"],
   exceptional: ["frontier", "max"],
 });
@@ -93,7 +86,7 @@ function enumValue(value, allowed, label) {
 function applyRoute(state, ruleCode, route) {
   if (!route) return;
   state.ruleCodes.push(ruleCode);
-  state.minimumTier = maxByRank(TIERS, state.minimumTier, route[0]);
+  state.minimumCapabilityFloor = maxByRank(CAPABILITY_FLOORS, state.minimumCapabilityFloor, route[0]);
   state.minimumReasoning = maxByRank(REASONING_LEVELS, state.minimumReasoning, route[1]);
 }
 
@@ -107,7 +100,7 @@ export function validateSelectionSignals(value) {
 
 export function deriveSelectionAssessment(signalsValue) {
   const signals = validateSelectionSignals(signalsValue);
-  const state = { minimumTier: "economy", minimumReasoning: "low", ruleCodes: [] };
+  const state = { minimumCapabilityFloor: "baseline", minimumReasoning: "low", ruleCodes: [] };
 
   applyRoute(state, `decision-ownership:${signals.decisionOwnership}`, DECISION_ROUTE[signals.decisionOwnership]);
   applyRoute(state, `seam-scope:${signals.seamScope}`, SEAM_ROUTE[signals.seamScope]);
@@ -121,17 +114,12 @@ export function deriveSelectionAssessment(signalsValue) {
       signals.dependencyShape === "atomic-cohesive";
     applyRoute(state,
       tightStrongOracle ? "reasoning-shape:deterministic-tight-strong-oracle" : "reasoning-shape:deterministic-without-tight-strong-oracle",
-      tightStrongOracle ? ["economy", "low"] : ["standard", "medium"],
+      tightStrongOracle ? ["baseline", "low"] : ["standard", "medium"],
     );
   } else {
     applyRoute(state, `reasoning-shape:${signals.reasoningShape}`, REASONING_ROUTE[signals.reasoningShape]);
   }
 
-  const compatibleMinimum = TIER_MINIMUM_REASONING[state.minimumTier];
-  if (rank(REASONING_LEVELS, state.minimumReasoning) < rank(REASONING_LEVELS, compatibleMinimum)) {
-    state.minimumReasoning = compatibleMinimum;
-    state.ruleCodes.push(`route-minimum:${state.minimumTier}/${compatibleMinimum}`);
-  }
   return state;
 }
 
@@ -149,8 +137,8 @@ export function validateSelectionAssessment(value) {
     throw new Error(`selection assessment.version must be ${SELECTION_ASSESSMENT_VERSION}`);
   const signals = validateSelectionSignals(assessment.signals);
   const derived = object(assessment.derived, "selection assessment.derived");
-  keysExactly(derived, ["minimumTier", "minimumReasoning", "ruleCodes"], [], "selection assessment.derived");
-  enumValue(derived.minimumTier, TIERS, "selection assessment.derived.minimumTier");
+  keysExactly(derived, ["minimumCapabilityFloor", "minimumReasoning", "ruleCodes"], [], "selection assessment.derived");
+  enumValue(derived.minimumCapabilityFloor, CAPABILITY_FLOORS, "selection assessment.derived.minimumCapabilityFloor");
   enumValue(derived.minimumReasoning, REASONING_LEVELS, "selection assessment.derived.minimumReasoning");
   if (!Array.isArray(derived.ruleCodes) || derived.ruleCodes.some((code) => typeof code !== "string" || !code) ||
       new Set(derived.ruleCodes).size !== derived.ruleCodes.length)
@@ -160,15 +148,15 @@ export function validateSelectionAssessment(value) {
     throw new Error(`selection assessment.derived must equal mechanically recomputed values: ${JSON.stringify(recomputed)}`);
 
   const selected = object(assessment.selected, "selection assessment.selected");
-  keysExactly(selected, ["tier", "reasoning"], [], "selection assessment.selected");
-  enumValue(selected.tier, TIERS, "selection assessment.selected.tier");
+  keysExactly(selected, ["capabilityFloor", "reasoning"], [], "selection assessment.selected");
+  enumValue(selected.capabilityFloor, CAPABILITY_FLOORS, "selection assessment.selected.capabilityFloor");
   enumValue(selected.reasoning, REASONING_LEVELS, "selection assessment.selected.reasoning");
 
-  const tierComparison = rank(TIERS, selected.tier) - rank(TIERS, derived.minimumTier);
+  const capabilityComparison = rank(CAPABILITY_FLOORS, selected.capabilityFloor) - rank(CAPABILITY_FLOORS, derived.minimumCapabilityFloor);
   const reasoningComparison = rank(REASONING_LEVELS, selected.reasoning) - rank(REASONING_LEVELS, derived.minimumReasoning);
-  if (tierComparison < 0 || reasoningComparison < 0)
-    throw new Error(`selected route ${selected.tier}/${selected.reasoning} is below derived minimum ${derived.minimumTier}/${derived.minimumReasoning}`);
-  const aboveMinimum = tierComparison > 0 || reasoningComparison > 0;
+  if (capabilityComparison < 0 || reasoningComparison < 0)
+    throw new Error(`selected route ${selected.capabilityFloor}/${selected.reasoning} is below derived minimum ${derived.minimumCapabilityFloor}/${derived.minimumReasoning}`);
+  const aboveMinimum = capabilityComparison > 0 || reasoningComparison > 0;
   if (aboveMinimum) {
     const exception = object(assessment.exception, "selection assessment.exception");
     keysExactly(exception, ["code", "detail"], [], "selection assessment.exception");
@@ -189,8 +177,8 @@ export function validateSelectionAssessment(value) {
   return assessment;
 }
 
-export function assertAssessmentSelection(assessment, tier, reasoning) {
+export function assertAssessmentSelection(assessment, capabilityFloor, reasoning) {
   validateSelectionAssessment(assessment);
-  if (assessment.selected.tier !== tier || assessment.selected.reasoning !== reasoning)
-    throw new Error(`selection assessment selected ${assessment.selected.tier}/${assessment.selected.reasoning} but routing request selected ${tier}/${reasoning}`);
+  if (assessment.selected.capabilityFloor !== capabilityFloor || assessment.selected.reasoning !== reasoning)
+    throw new Error(`selection assessment selected ${assessment.selected.capabilityFloor}/${assessment.selected.reasoning} but routing request selected ${capabilityFloor}/${reasoning}`);
 }

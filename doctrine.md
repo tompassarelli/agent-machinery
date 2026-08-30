@@ -44,35 +44,35 @@ does not by itself change the resolved engineering context.
 
 ## Route the work
 
-Choose function from task shape. Choose grade, domains, topology, semantic
-tier, reasoning, posture, and capabilities independently:
+Choose function from task shape. Choose grade, domains, topology, capability
+floor, service class, reasoning, posture, and capabilities independently:
 
 - **role** — responsibility and deliverable;
 - **task grade** — scope, autonomy, novelty, and cross-boundary responsibility;
 - **domain requirements** — expertise and context the brief must supply;
 - **topology** — terminal worker or coordinating orchestrator authority;
-- **tier** — provider-independent capability floor;
+- **capability floor** — minimum semantic competence;
+- **service class** — the price-quality-latency selection objective;
 - **reasoning** — deliberation budget;
 - **posture** — what yields when values collide; and
 - **capabilities** — enforceable access labels a consumer must map fail-closed.
 
 A stock template is a behavior contract plus a fixed topology/capability
 boundary. Use it unchanged when responsibility and authority fit. A justified
-override may change task grade, domains, tier, reasoning, or posture. A change
+override may change task grade, domains, capability floor, service class,
+reasoning, or posture. A change
 to topology, responsibility, deliverable, capabilities, done criteria, or
 report shape requires a bespoke composition. The template ID is provenance
 metadata inside `composition`; it may differ from `role` and grants no
 ownership or authority.
 
-`tier` and `reasoning` are independent routing axes. Tier names the
-provider-independent semantic capability floor; reasoning names the
-deliberation budget. Do not infer, normalize, or reject one from the other
-solely because their values differ. In particular, an economy tier may carry
-high, xhigh, or max reasoning when the brief calls for it. A stock template's
-pair is only a default; an explicit override remains part of the portable
-request and consumers must preserve it. Any minimum floor derived by a
-selection assessment is an explicit safety rule, not a replacement for the
-selected reasoning value.
+`capabilityFloor`, `serviceClass`, and `reasoning` are independent routing
+axes. Capability floor states what competence may not be traded away. Service
+class states whether selection should optimize for economy, speed, balance, or
+premium quality after that floor is met. Reasoning states the desired
+deliberation budget. A stock template supplies defaults only; role identity
+never raises service class, capabilities, or permissions. An explicit override
+remains part of the portable request and the resolver must preserve it.
 
 ## Admit only useful work
 
@@ -138,14 +138,13 @@ residual uncertainty instead of manufacturing more work.
 
 ## Routing laws
 
-1. **Minimum-sufficient floor.** Reserve economy/low for unusually
+1. **Minimum-sufficient floor.** Reserve baseline/low for unusually
    deterministic, tightly bounded work with an objective end-to-end oracle.
    Ordinary meaningful engineering starts at standard/medium. Cross-boundary,
-   architectural, weak-oracle, or hard-to-reverse work starts at senior/high.
+   architectural, weak-oracle, or hard-to-reverse work starts at advanced/high.
    System-shaping or open-solution work starts at frontier/xhigh.
-2. **Continuous ramp.** Harder work climbs economy → standard → senior →
-   frontier. A consumer maps the semantic route to a concrete runtime without
-   changing the requested floor.
+2. **Continuous ramp.** Harder work climbs baseline → standard → advanced →
+   frontier. Service class and reasoning remain separate choices at every step.
 3. **Quality floor.** Resource pressure may trim optional breadth, polish, and
    retries; it never silently lowers the minimum responsible route.
 4. **Blast radius routes up; importance alone does not.**
@@ -184,15 +183,19 @@ owner who can judge completion.
 
 ## Portable request
 
-Every run carries exactly eight routing fields:
+Every run carries exactly nine routing fields:
 
-`role`, `taskGrade`, `domainRequirements`, `topology`, `tier`,
-`reasoning`, `posture`, and `composition`.
+`role`, `taskGrade`, `domainRequirements`, `topology`, `capabilityFloor`,
+`serviceClass`, `reasoning`, `posture`, and `composition`.
 
-Provider, model, account, allocation, dispatch syntax, runtime identity, and
-coordination state are consumer-owned execution facts, never routing fields.
-Run lifecycle, wake, wait, rearm, Stop, and transport are also consumer-owned
-and remain outside Agent Machinery.
+Agent Machinery owns the provider/model/effort catalog, empirical calibration
+policy, and the deterministic resolver from the portable request plus a
+consumer-supplied live execution inventory to a ranked execution plan. The
+consumer owns connectivity, authentication, accounts, leases, mechanical
+dispatch, raw telemetry persistence, recurrence hosting, and settlement. A
+lease race is new inventory for the same resolver, never a consumer fallback
+table. Provider, model, account, dispatch syntax, runtime identity, and
+coordination state remain outside the portable request.
 The raw JSON Schemas classify structural shape only. The `validateContract`
 export advertised by `catalog.json` composes that structural check with the
 package's semantic validator and is the normative machine contract.

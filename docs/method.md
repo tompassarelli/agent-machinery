@@ -14,9 +14,10 @@ Template identity is provenance metadata inside `composition`; it is
 independent of the request's role and contributes no ownership or authority.
 
 Generated templates flatten role, grade, topology, posture, capabilities, and
-communication source blocks. They intentionally omit concrete providers,
-models, tools, runtime commands, and model-specific steering. Consumers may
-layer those execution facts without modifying the neutral source contract.
+communication source blocks. They omit concrete providers and models because
+those are resolved at run admission from the selection catalog, empirical
+evidence, and the consumer's live inventory. Consumers execute that plan; they
+do not layer a second model mapping over it.
 
 Each generated template also states effective filesystem authority. Treat
 capability implications as authority: search includes read, unrestricted shell

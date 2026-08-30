@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:agent-machinery:schema:routing-request:v2",
+  "$id": "urn:agent-machinery:schema:routing-request:v3",
   "title": "Agent-run provider-neutral routing request",
   "description": "Structural shape only. Use the catalog-advertised validateContract export for normative structural and semantic validation.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["role", "taskGrade", "domainRequirements", "topology", "tier", "reasoning", "posture", "composition"],
+  "required": ["role", "taskGrade", "domainRequirements", "topology", "capabilityFloor", "serviceClass", "reasoning", "posture", "composition"],
   "properties": {
     "role": { "$ref": "#/$defs/roleId" },
     "taskGrade": { "enum": ["novice", "junior", "mid", "senior", "staff", "principal", "distinguished"] },
@@ -17,7 +17,14 @@
       "enum": ["worker", "orchestrator"],
       "description": "Coordination jurisdiction: worker is terminal; orchestrator may recursively staff freshly admitted children through an enforcing harness."
     },
-    "tier": { "enum": ["economy", "standard", "senior", "frontier"] },
+    "capabilityFloor": {
+      "enum": ["baseline", "standard", "advanced", "frontier"],
+      "description": "Minimum semantic competence; it does not encode price, latency, or provider preference."
+    },
+    "serviceClass": {
+      "enum": ["economy", "fast", "balanced", "premium"],
+      "description": "Selection objective for price-quality-latency tradeoffs; it never lowers capabilityFloor."
+    },
     "reasoning": { "enum": ["low", "medium", "high", "xhigh", "max"] },
     "posture": { "enum": ["explore", "deliver", "preserve", "prune", "evaluate"] },
     "composition": {
@@ -30,7 +37,7 @@
   },
   "$defs": {
     "overrideField": {
-      "enum": ["taskGrade", "domainRequirements", "tier", "reasoning", "posture"]
+      "enum": ["taskGrade", "domainRequirements", "capabilityFloor", "serviceClass", "reasoning", "posture"]
     },
     "templateComposition": {
       "type": "object",

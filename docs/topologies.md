@@ -1,6 +1,7 @@
 # Topologies — coordination authority
 
-Topology is conceptually independent of role, grade, tier, reasoning, and
+Topology is conceptually independent of role, grade, capability floor,
+service class, reasoning, and
 posture. It says whether an agent owns one terminal piece or owns decomposition
 and reduction. Current stock templates deliberately ship fixed,
 enforceable topology/capability pairings: the orchestrator seats — director and

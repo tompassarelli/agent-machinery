@@ -20,12 +20,12 @@ const cases = [
     value: (item) => item.transition,
   },
   {
-    id: "routing-request-v2",
+    id: "routing-request-v3",
     fixture: readJson("contracts/routing-request.fixtures.json"),
     value: (item) => item.request,
   },
   {
-    id: "minimum-sufficient-v1",
+    id: "minimum-sufficient-v2",
     fixture: readJson("contracts/selection-assessment.fixtures.json"),
     value: (item) => item.assessment,
   },
@@ -46,7 +46,7 @@ function applyOperations(base, operations) {
 
 const staffingFixture = readJson("staffing/catalog.fixtures.json");
 cases.push({
-  id: "staffing-catalog-v2",
+  id: "staffing-catalog-v3",
   fixture: staffingFixture,
   value: (item) => item.source ? readJson(item.source) : applyOperations(staffingFixture.base, item.operations),
 });

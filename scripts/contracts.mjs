@@ -20,15 +20,15 @@ const definitions = new Map([
     schema: "contracts/work-ownership.schema.json",
     semantic: validateWorkOwnershipTransition,
   }],
-  ["routing-request-v2", {
+  ["routing-request-v3", {
     schema: "contracts/routing-request.schema.json",
     semantic: validateRoutingRequest,
   }],
-  ["minimum-sufficient-v1", {
+  ["minimum-sufficient-v2", {
     schema: "contracts/selection-assessment.schema.json",
     semantic: validateSelectionAssessment,
   }],
-  ["staffing-catalog-v2", {
+  ["staffing-catalog-v3", {
     schema: "staffing/catalog.schema.json",
     semantic: validateStaffingCatalog,
   }],

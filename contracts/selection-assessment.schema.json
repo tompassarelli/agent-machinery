@@ -1,14 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:agent-machinery:schema:selection-assessment:v1",
+  "$id": "urn:agent-machinery:schema:selection-assessment:v2",
   "title": "Agent-run minimum-sufficient selection assessment sidecar",
   "description": "Structural shape only. Use the catalog-advertised validateContract export for normative structural and semantic validation.",
   "type": "object",
   "additionalProperties": false,
   "required": ["version", "signals", "derived", "selected"],
   "properties": {
-    "$schema": { "const": "urn:agent-machinery:schema:selection-assessment:v1" },
-    "version": { "const": "minimum-sufficient-v1" },
+    "$schema": { "const": "urn:agent-machinery:schema:selection-assessment:v2" },
+    "version": { "const": "minimum-sufficient-v2" },
     "signals": {
       "type": "object",
       "additionalProperties": false,
@@ -26,9 +26,9 @@
     "derived": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["minimumTier", "minimumReasoning", "ruleCodes"],
+      "required": ["minimumCapabilityFloor", "minimumReasoning", "ruleCodes"],
       "properties": {
-        "minimumTier": { "$ref": "#/$defs/tier" },
+        "minimumCapabilityFloor": { "$ref": "#/$defs/capabilityFloor" },
         "minimumReasoning": { "$ref": "#/$defs/reasoning" },
         "ruleCodes": {
           "type": "array", "minItems": 1, "uniqueItems": true,
@@ -39,9 +39,9 @@
     "selected": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["tier", "reasoning"],
+      "required": ["capabilityFloor", "reasoning"],
       "properties": {
-        "tier": { "$ref": "#/$defs/tier" },
+        "capabilityFloor": { "$ref": "#/$defs/capabilityFloor" },
         "reasoning": { "$ref": "#/$defs/reasoning" }
       }
     },
@@ -50,14 +50,14 @@
       "additionalProperties": false,
       "required": ["code", "detail"],
       "properties": {
-        "code": { "enum": ["explicit-human-floor", "recent-lower-tier-failure", "calibration-experiment", "unmodeled-risk"] },
+        "code": { "enum": ["explicit-human-floor", "recent-lower-capability-failure", "calibration-experiment", "unmodeled-risk"] },
         "detail": { "type": "string", "minLength": 1 }
       }
     },
     "exceptionalDeliberation": { "type": "string", "minLength": 1 }
   },
   "$defs": {
-    "tier": { "enum": ["economy", "standard", "senior", "frontier"] },
+    "capabilityFloor": { "enum": ["baseline", "standard", "advanced", "frontier"] },
     "reasoning": { "enum": ["low", "medium", "high", "xhigh", "max"] }
   }
 }

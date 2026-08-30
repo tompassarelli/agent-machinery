@@ -8,8 +8,8 @@ role follows the required function (execute / curate / implement / integrate /
 design / direct / scout / analyze / guard / review / verify / judge /
 research-science — see
 doctrine.md).
-Role is conceptually independent of `taskGrade`, semantic tier, deliberation,
-domain requirements, topology, and posture. A stock template supplies a useful
+Role is conceptually independent of `taskGrade`, capability floor, service
+class, deliberation, domain requirements, topology, and posture. A stock template supplies a useful
 default combination, while a bespoke composition can recombine the axes. The
 shipped stock templates intentionally keep fixed, enforceable
 role/topology/capability pairings; changing topology requires a bespoke
@@ -33,15 +33,15 @@ worker's identity or provider model:
   board across programs and long horizons.
 
 The ladder is two segments on different axes. `novice → junior → mid → senior`
-is the IC / capability segment (senior terminal) and drives semantic tier and
-effort. `staff → principal → distinguished` is the scope / influence segment
+is the IC / capability segment (senior terminal) and drives capability floor
+and reasoning. `staff → principal → distinguished` is the scope / influence segment
 and drives coordination breadth, not raw intelligence; paired with orchestrator
 topology it is the team-lead → program → portfolio seat ladder. Research is a
 function, not a grade — a scientist can carry any grade its task
 warrants and defaults to staff.
 
 Grade informs routing but never directly selects a provider or model. Domain
-requirements, topology, semantic tier, deliberation, and posture remain
+requirements, topology, capability floor, service class, deliberation, and posture remain
 separate.
 
 Source-of-truth note: `agents/*.md` are GENERATED from these blocks by
@@ -153,7 +153,7 @@ ROLE: DIRECTOR. Deliverable: one reconciled, evidence-backed result assembled
 from independently delegated child outcomes. You coordinate; you do not execute
 terminal worker subtasks yourself.
 May decide: decomposition, dependency edges, each child's worker/orchestrator
-topology, role/grade/tier, parallel waves, seam ownership, and the final
+topology, role/grade/capability floor, parallel waves, seam ownership, and the final
 reconciliation judgment. Every child is freshly classified and admitted
 through the consumer's admission boundary; nesting never inherits the
 parent's route.
@@ -197,7 +197,7 @@ ROLE: TEAM-LEAD. Deliverable: one workstream reconciled into a single
 evidence-backed result. You coordinate one workstream; you do not execute
 terminal worker subtasks yourself.
 May decide: decomposition of THIS workstream, each child's worker/orchestrator
-topology, role/grade/tier, parallel waves, intra-workstream seam ownership, and
+topology, role/grade/capability floor, parallel waves, intra-workstream seam ownership, and
 the reconciliation judgment for the workstream. Every child is freshly admitted
 through the consumer's admission boundary; nesting never inherits your route.
 CONTEXT ENVELOPE — GIVEN: the full interior of your own workstream (every child
@@ -462,8 +462,9 @@ what you could NOT check. A verdict from reading alone is marked
 "static-only". Nothing else.
 REDIRECT: ranking two or more supplied alternatives or producing a
 rubric-backed selection → judge. A single claim remains verifier work at
-any leverage. A justified stock-template override may move `taskGrade`, tier,
-and deliberation up or down; the task's quality floor remains binding and can
+any leverage. A justified stock-template override may move `taskGrade`,
+capability floor, service class, and deliberation up or down; the task's
+quality floor remains binding and can
 forbid a lower route. Multi-criterion review of one artifact belongs to
 reviewer.
 ```

@@ -13,9 +13,11 @@ import {
 } from "../index.mjs";
 import { FORBIDDEN_TEXT, portableSourceText, validatePackage } from "../scripts/validate.mjs";
 
-test("forbidden provider brands match as real words", () => {
-  const brands = [["Open", "AI"], ["Nor", "th"]].map((parts) => parts.join(""));
-  for (const brand of brands) assert.equal(FORBIDDEN_TEXT.test(brand), true, brand);
+test("runtime-owner brands remain forbidden while provider catalog brands are allowed", () => {
+  const runtimeOwner = ["Nor", "th"].join("");
+  const provider = ["Open", "AI"].join("");
+  assert.equal(FORBIDDEN_TEXT.test(runtimeOwner), true, runtimeOwner);
+  assert.equal(FORBIDDEN_TEXT.test(provider), false, provider);
 });
 
 test("typed source permits only its exact language header", () => {
@@ -38,7 +40,7 @@ test("package manifest permits only exact typed-authoring commands", () => {
   );
 });
 
-test("export manifest is a closed provider-neutral package", () => {
+test("export manifest is a closed source-authority package", () => {
   const result = validatePackage();
   assert.equal(result.units, 30);
   assert.equal(result.templates, 16);
@@ -54,7 +56,8 @@ test("public index resolves declared assets and validators", () => {
     taskGrade: "novice",
     domainRequirements: [],
     topology: "worker",
-    tier: "economy",
+    capabilityFloor: "baseline",
+    serviceClass: "balanced",
     reasoning: "low",
     posture: "deliver",
     composition: { kind: "template", id: "executor", overrides: [] },
@@ -125,7 +128,8 @@ test("compose-routing honors an explicit bespoke contract for a stock-named role
     "integrator",
     "--task-grade", "senior",
     "--topology", "worker",
-    "--tier", "senior",
+    "--capability-floor", "advanced",
+    "--service-class", "balanced",
     "--deliberation", "high",
     "--posture", "deliver",
     "--rationale", "the explicit contract narrows the stock responsibility",
@@ -134,7 +138,7 @@ test("compose-routing honors an explicit bespoke contract for a stock-named role
   assert.equal(result.exitCode, 0, new TextDecoder().decode(result.stderr));
   const request = JSON.parse(new TextDecoder().decode(result.stdout));
   assert.deepEqual(Object.keys(request), [
-    "role", "taskGrade", "domainRequirements", "topology", "tier", "posture", "reasoning", "composition",
+    "role", "taskGrade", "domainRequirements", "topology", "capabilityFloor", "serviceClass", "posture", "reasoning", "composition",
   ]);
   assert.equal(request.role, "integrator");
   assert.deepEqual(request.composition, {

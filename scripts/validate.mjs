@@ -9,7 +9,6 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const EXCLUDED_TEXT = new Set(["PROVENANCE.md", "NOTICE", "LICENSE", "LICENSE-MIT", "LICENSE-APACHE"]);
 const FORBIDDEN_DIRS = new Set(["adapters", "hooks", "providers", "secrets"]);
 const forbiddenBrands = [
-  ["Anth", "ropic"], ["Open", "AI"], ["Clau", "de"], ["Code", "x"],
   ["Nor", "th"], ["Fi", "rn"], ["Nix", "OS"], ["Bea", "gle"],
 ].map((parts) => parts.join(""));
 export const FORBIDDEN_TEXT = new RegExp(

@@ -1,19 +1,20 @@
 # agent-machinery
 
-Provider-independent delegation contracts, run design, role templates, and
-reusable engineering procedures.
+Delegation contracts, run design, role templates, deterministic model
+selection, and reusable engineering procedures.
 
-The package is deliberately a source authority, not a runtime. It does not
-choose providers or models, dispatch work, manage accounts, coordinate live
-participants, install hooks, or project policy into a harness. A consumer
-imports the neutral assets declared in `catalog.json` and combines them with
-its own adapters and enforcement.
+The package is deliberately a source authority, not a runtime. It owns the
+provider/model/effort catalog, empirical selection policy, and pure resolver,
+but does not connect to providers, manage accounts or leases, dispatch work,
+persist telemetry, coordinate live participants, install hooks, or project
+policy into a harness. A runtime supplies live inventory and observations and
+executes the returned ranked plan.
 
 ## Public surface
 
 - `agent-machinery:catalog.json` is the complete export manifest. Its
-  `delegation` module groups acknowledged work ownership with
-  provider-independent run design; `agent-practice` groups the optional
+  `delegation` module groups acknowledged work ownership with portable run
+  design; `agent-practice` groups the optional
   engineering workflows.
 - `agent-machinery:doctrine.md` defines the portable actor, routing, and topology
   rules.
@@ -23,6 +24,8 @@ its own adapters and enforcement.
 - Detailed routing, composition, and extension guidance lives in
   `agent-machinery:docs/`. Generated provider-neutral templates live in
   `agent-machinery:agents/`.
+- `agent-machinery:selection/catalog.json` and `resolveExecutionPlan` are the
+  single authority for provider/model/effort eligibility and ranking.
 
 ```sh
 bun test

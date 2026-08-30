@@ -9,7 +9,7 @@ a form requirement or evidence of higher stakes. Consumers use
 `validateRoutingAdmission` at the execution boundary; raw routing validation
 alone does not admit work.
 
-The provider-independent routing request has exactly eight fields:
+The portable routing request has exactly nine fields:
 
 | Field | Meaning |
 | --- | --- |
@@ -17,25 +17,24 @@ The provider-independent routing request has exactly eight fields:
 | `taskGrade` | Work scope and autonomy prior |
 | `domainRequirements` | Context or expertise the brief must supply |
 | `topology` | `worker` or `orchestrator` authority |
-| `tier` | Semantic capability floor |
+| `capabilityFloor` | Minimum semantic competence (`baseline` through `frontier`) |
+| `serviceClass` | Price-quality-latency objective (`economy`, `fast`, `balanced`, or `premium`) |
 | `reasoning` | Deliberation level |
 | `posture` | Value-collision ordering |
 | `composition` | Stock template or complete bespoke contract, including composition provenance |
 
-Tier and reasoning are orthogonal. `tier` is the provider-independent
-capability floor and `reasoning` is the deliberation budget; no value on one
-axis supplies a default or normalization for the other. Every vocabulary pair
-that satisfies the applicable minimum floor is valid, including
-`economy` + `high`, `economy` + `xhigh`, and `economy` + `max`. Consumers must
-preserve an explicit pair rather than replacing it with a stock-template
-default. A selection assessment may impose a minimum reasoning floor as an
-explicit safety rule, but that floor does not couple or rewrite the selected
-axis.
+Capability floor, service class, and reasoning are orthogonal.
+`capabilityFloor` is a non-negotiable competence floor; `serviceClass` chooses
+the selection objective after that floor; `reasoning` is the deliberation
+budget. No value on one axis normalizes another. Consumers preserve the
+explicit triple and execute the Agent Machinery plan rather than replacing it
+with a local template or model default.
 
 Stock templates have fixed topology and capabilities. `composition.id` names
 the template and may differ from `role`; that identity is nested provenance
 metadata, not ownership, authority, or a ninth field. Overrides may change task
-grade, domains, tier, reasoning, or posture and must record the exact changed
+grade, domains, capability floor, service class, reasoning, or posture and
+must record the exact changed
 fields plus one reason. A bespoke composition supplies responsibility,
 deliverable, capabilities, decision and escalation bounds, done criteria, and
 report shape.
@@ -51,18 +50,20 @@ Capability lists are transitively closed declarations of effective authority:
 the effective closure, not only the literal labels. If it cannot enforce the
 declared filesystem boundary, it must fail closed and not run the agent.
 
-The optional `minimum-sufficient-v1` sidecar derives a minimum tier and
-reasoning level from decision ownership, seam scope, error exposure, oracle
+The optional `minimum-sufficient-v2` sidecar derives a minimum capability
+floor and reasoning level from decision ownership, seam scope, error exposure, oracle
 strength, foundational impact, dependency shape, and reasoning shape. It is
 not a ninth routing field.
 
 Consumers map canonical capabilities to concrete tools and sandboxes. Missing
-or unenforceable capability mappings fail closed. Provider, model, account,
-dispatch, telemetry, and live coordination remain outside this contract.
-Run lifecycle, wake, wait, rearm, Stop, and transport remain outside this
-package as well.
+or unenforceable capability mappings fail closed. Agent Machinery resolves a
+ranked provider/model/effort plan from this request, its selection catalog,
+empirical observations, and consumer-supplied live inventory. The consumer
+owns accounts, leases, connectivity, dispatch, raw telemetry, recurrence, live
+coordination, and settlement. A changed inventory is resolved again through
+the same function; it does not authorize a second fallback table.
 
 Schema identities are stable and versioned independently of package paths:
-`urn:agent-machinery:schema:routing-request:v2` and
-`urn:agent-machinery:schema:selection-assessment:v1`. Resolve their packaged
+`urn:agent-machinery:schema:routing-request:v3` and
+`urn:agent-machinery:schema:selection-assessment:v2`. Resolve their packaged
 files through the contract and asset paths in `catalog.json`.

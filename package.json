@@ -11,6 +11,7 @@
     "./doctrine": "./doctrine.md",
     "./docs/*": "./docs/*",
     "./staffing/*": "./staffing/*",
+    "./selection/*": "./selection/*",
     "./contracts/*": "./contracts/*",
     "./agents/*": "./agents/*",
     "./skills/*": "./skills/*"
@@ -33,6 +34,7 @@
     "doctrine.md",
     "docs",
     "staffing",
+    "selection",
     "contracts",
     "agents",
     "skills",

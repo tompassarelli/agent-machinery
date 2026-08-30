@@ -5,6 +5,7 @@ import {
   AGENT_SOURCE_PATHS,
   CATALOG_SCHEMA_ID,
   PROJECT_EXPOSURE_PROFILE_SCHEMA_ID,
+  MODEL_SELECTION_CATALOG_SCHEMA_ID,
   ROUTING_FIELDS,
   ROUTING_REQUEST_SCHEMA_ID,
   SELECTION_ASSESSMENT_SCHEMA_ID,
@@ -26,6 +27,7 @@ test("catalog assets and contracts bind stable versioned IDs to shipped schemas"
   const expected = [
     CATALOG_SCHEMA_ID,
     PROJECT_EXPOSURE_PROFILE_SCHEMA_ID,
+    MODEL_SELECTION_CATALOG_SCHEMA_ID,
     WORK_OWNERSHIP_SCHEMA_ID,
     STAFFING_CATALOG_SCHEMA_ID,
     ROUTING_REQUEST_SCHEMA_ID,
@@ -50,16 +52,17 @@ test("catalog assets and contracts bind stable versioned IDs to shipped schemas"
   }
 });
 
-test("routing ABI remains exactly eight fields while template identity differs from role", () => {
+test("routing ABI remains exactly nine fields while template identity differs from role", () => {
   assert.deepEqual(ROUTING_FIELDS, [
-    "role", "taskGrade", "domainRequirements", "topology", "tier", "reasoning", "posture", "composition",
+    "role", "taskGrade", "domainRequirements", "topology", "capabilityFloor", "serviceClass", "reasoning", "posture", "composition",
   ]);
   const request = {
     role: "agent-machinery-integration-owner",
     taskGrade: "senior",
     domainRequirements: [],
     topology: "worker",
-    tier: "senior",
+    capabilityFloor: "advanced",
+    serviceClass: "balanced",
     reasoning: "high",
     posture: "deliver",
     composition: { kind: "template", id: "integrator", overrides: [] },
@@ -110,7 +113,8 @@ test("routing rejects capability lists that conceal shell write authority", () =
     taskGrade: "senior",
     domainRequirements: [],
     topology: "worker",
-    tier: "senior",
+    capabilityFloor: "advanced",
+    serviceClass: "balanced",
     reasoning: "high",
     posture: "deliver",
     composition: {

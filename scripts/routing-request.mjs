@@ -4,12 +4,12 @@ import {
 import { canonicalRoleId } from "./role-id.mjs";
 import { resolveProjectExposureProfile } from "./project-exposure-profile.mjs";
 
-export const ROUTING_REQUEST_SCHEMA_ID = "urn:agent-machinery:schema:routing-request:v2";
+export const ROUTING_REQUEST_SCHEMA_ID = "urn:agent-machinery:schema:routing-request:v3";
 export const ROUTING_FIELDS = [
-  "role", "taskGrade", "domainRequirements", "topology", "tier", "reasoning", "posture", "composition",
+  "role", "taskGrade", "domainRequirements", "topology", "capabilityFloor", "serviceClass", "reasoning", "posture", "composition",
 ];
 export const OVERRIDE_FIELDS = [
-  "taskGrade", "domainRequirements", "tier", "reasoning", "posture",
+  "taskGrade", "domainRequirements", "capabilityFloor", "serviceClass", "reasoning", "posture",
 ];
 export const CONTRACT_FIELDS = [
   "responsibility", "deliverable", "capabilities", "mayDecide", "mustEscalate", "doneWhen", "report",
@@ -49,7 +49,8 @@ export function effectivePreset(preset, catalog) {
     taskGrade: preset.taskGrade,
     domainRequirements: [],
     topology: preset.topology,
-    tier: preset.tier,
+    capabilityFloor: preset.capabilityFloor,
+    serviceClass: preset.serviceClass,
     reasoning: preset.deliberation,
     posture: preset.posture,
   };
@@ -77,7 +78,8 @@ export function validateRoutingRequest(value, catalog = loadStaffingCatalog()) {
   keysExactly(request, ROUTING_FIELDS, "routing request");
   const role = canonicalRoleId(request.role, "role");
   for (const [field, axis] of [
-    ["taskGrade", "taskGrades"], ["topology", "topologies"], ["tier", "semanticTiers"],
+    ["taskGrade", "taskGrades"], ["topology", "topologies"], ["capabilityFloor", "capabilityFloors"],
+    ["serviceClass", "serviceClasses"],
     ["reasoning", "deliberations"], ["posture", "postures"],
   ]) {
     if (!catalog.vocabulary[axis].includes(request[field]))

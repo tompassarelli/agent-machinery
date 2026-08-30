@@ -1,23 +1,24 @@
 {
   "version": 1,
   "base": {
-    "$schema": "urn:agent-machinery:schema:staffing-catalog:v2",
-    "version": 2,
+    "$schema": "urn:agent-machinery:schema:staffing-catalog:v3",
+    "version": 3,
     "vocabulary": {
       "taskGrades": ["senior"],
-      "semanticTiers": ["senior"],
+      "capabilityFloors": ["advanced"],
+      "serviceClasses": ["balanced"],
       "deliberations": ["high"],
       "topologies": ["worker", "orchestrator"],
       "postures": ["deliver", "preserve", "prune"],
       "capabilities": ["filesystem.read", "filesystem.search", "filesystem.write", "shell", "shell.readonly", "web", "coordination"]
     },
     "defaults": {
-      "taskGrade": "senior", "tier": "senior", "deliberation": "high",
+      "taskGrade": "senior", "capabilityFloor": "advanced", "serviceClass": "balanced", "deliberation": "high",
       "topology": "worker", "posture": "deliver"
     },
     "presets": [
       {
-        "name": "executor", "taskGrade": "senior", "tier": "senior", "deliberation": "high",
+        "name": "executor", "taskGrade": "senior", "capabilityFloor": "advanced", "serviceClass": "balanced", "deliberation": "high",
         "topology": "worker", "posture": "deliver",
         "capabilities": ["filesystem.read", "filesystem.search", "filesystem.write", "shell"],
         "tagline": "Execute a bounded change", "description": "Own one bounded implementation seam."
@@ -36,8 +37,8 @@
     },
     {
       "name": "default is outside declared vocabulary",
-      "errorContains": "invalid defaults.tier",
-      "operations": [{ "op": "set", "path": ["defaults", "tier"], "value": "frontier" }]
+      "errorContains": "invalid defaults.capabilityFloor",
+      "operations": [{ "op": "set", "path": ["defaults", "capabilityFloor"], "value": "frontier" }]
     },
     {
       "name": "duplicate preset name",
@@ -45,7 +46,7 @@
       "operations": [{
         "op": "append", "path": ["presets"],
         "value": {
-          "name": "executor", "taskGrade": "senior", "tier": "senior", "deliberation": "high",
+          "name": "executor", "taskGrade": "senior", "capabilityFloor": "advanced", "serviceClass": "balanced", "deliberation": "high",
           "topology": "worker", "posture": "deliver",
           "capabilities": ["filesystem.read", "filesystem.search", "filesystem.write", "shell"],
           "tagline": "Duplicate executor", "description": "A duplicate role identity."
