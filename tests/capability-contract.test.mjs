@@ -39,7 +39,8 @@ test("catalog assets and contracts bind stable versioned IDs to shipped schemas"
   assert.deepEqual(
     catalog.units.filter(({ kind }) => kind === "module").map(({ id, members }) => [id, members]),
     [
-      ["agent-machinery", ["work-ownership-distilled", "agent-run-design-distilled", "agent-practice"]],
+      ["agent-machinery", ["delegation", "agent-practice"]],
+      ["delegation", ["work-ownership-distilled", "agent-run-design-distilled"]],
       ["agent-practice", ["build-vs-reuse-distilled", "external-code-distilled", "greenfield-distilled", "planning-distilled", "prior-art-distilled", "production-hardening-distilled", "program-craftsmanship-distilled", "program-stewardship-distilled", "rust-development-distilled", "skill-maintenance-distilled", "terse-distilled", "verification-distilled"]],
     ],
   );

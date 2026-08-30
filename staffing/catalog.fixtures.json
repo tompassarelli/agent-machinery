@@ -25,8 +25,8 @@
     ]
   },
   "valid": [
-    { "name": "minimal closed staffing catalog", "operations": [] },
-    { "name": "shipped staffing catalog", "source": "staffing/catalog.json" }
+    { "name": "minimal closed agent-run template catalog", "operations": [] },
+    { "name": "shipped agent-run template catalog", "source": "staffing/catalog.json" }
   ],
   "invalid": [
     {

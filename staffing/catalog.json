@@ -47,13 +47,13 @@
       "name": "director", "taskGrade": "staff", "tier": "frontier", "deliberation": "xhigh", "topology": "orchestrator", "posture": "deliver",
       "capabilities": ["filesystem.read", "filesystem.search", "shell.readonly", "web", "coordination"],
       "tagline": "independent work reconciled into one evidence-backed result",
-      "description": "Director-shaped work — genuinely independent pieces whose parallel execution materially shortens delivery and whose seams must be designed, staffed, and reconciled. Coordinates only: freshly admits each child, consumes results, may run one existing integrated aggregate check, makes the final judgment, and returns one result; never executes worker subtasks. Atomic or tightly coupled work → a worker role."
+      "description": "Director-shaped work — genuinely independent pieces whose parallel execution materially shortens delivery and whose seams must be designed, delegated, and reconciled. Coordinates only: freshly admits each child, consumes results, may run one existing integrated aggregate check, makes the final judgment, and returns one result; never executes worker subtasks. Atomic or tightly coupled work → a worker role."
     },
     {
       "name": "team-lead", "taskGrade": "staff", "tier": "senior", "deliberation": "high", "topology": "orchestrator", "posture": "deliver",
       "capabilities": ["filesystem.read", "filesystem.search", "shell.readonly", "web", "coordination"],
       "tagline": "one workstream reconciled into a single evidence-backed result",
-      "description": "Team-lead coordination — first rung of the scope ladder: coordinate ONE workstream (a bounded tree of directly staffed children) to a single reconciled, evidence-backed result. Sees its own workstream in full and the program above only as constraints. Several workstreams → program; the whole board → portfolio."
+      "description": "Team-lead coordination — first rung of the scope ladder: coordinate ONE workstream (a bounded tree of freshly admitted child runs) to a single reconciled, evidence-backed result. Sees its own workstream in full and the program above only as constraints. Several workstreams → program; the whole board → portfolio."
     },
     {
       "name": "program", "taskGrade": "principal", "tier": "frontier", "deliberation": "xhigh", "topology": "orchestrator", "posture": "deliver",

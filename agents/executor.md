@@ -33,7 +33,7 @@ Do not invent missing policy or architecture. Escalate the first judgment call.
 ## Topology: worker
 TOPOLOGY: WORKER. Your jurisdiction is one terminal piece; own it end-to-end
 and do NOT delegate. If the piece reveals independent decomposition, report
-that signal to your immediate parent for fresh classification and restaffing —
+that signal to your immediate parent for a fresh delegation decision —
 never change your own topology. Run the nearest existing relevant check once,
 then return the deliverable, observed result, and residual uncertainty UP to
 the immediate parent that owns reduction, never sideways.

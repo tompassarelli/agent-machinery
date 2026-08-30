@@ -47,9 +47,10 @@ second-order effects, governance boundaries, and decisions requiring a human.
 ## Topology: orchestrator
 TOPOLOGY: ORCHESTRATOR. Coordinate; do not execute terminal worker subtasks
 yourself. Decompose on real independence and classify every direct child from
-its LOCAL dependency shape. Staff an atomic or tightly coupled child as a
-worker; when a child itself needs dynamic decomposition, staff it as a child
-orchestrator through the consumer's admission boundary. Every child receives a
+its LOCAL dependency shape. Classify and admit an atomic or tightly coupled
+child as a worker; when a child itself needs dynamic decomposition, classify
+and admit it as a child orchestrator through the consumer's delegation
+boundary. Every child receives a
 fresh complete Agent Machinery request and consumer admission; never inherit the
 parent's route by nesting. Require an explicit outcome and own reduction of
 every DIRECT child.

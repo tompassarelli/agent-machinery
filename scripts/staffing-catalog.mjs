@@ -73,32 +73,32 @@ export function validatePostureCapabilities(posture, capabilities, label = "capa
 
 function keysOnly(value, allowed, label) {
   const unknown = Object.keys(value ?? {}).filter((key) => !allowed.includes(key));
-  if (unknown.length) throw new Error(`staffing catalog: ${label} has unknown field(s): ${unknown.join(", ")}`);
+  if (unknown.length) throw new Error(`agent-run template catalog: ${label} has unknown field(s): ${unknown.join(", ")}`);
 }
 
 export function validateStaffingCatalog(catalog) {
-  if (catalog?.version !== 2) throw new Error("staffing catalog: version must be 2");
+  if (catalog?.version !== 2) throw new Error("agent-run template catalog: version must be 2");
   keysOnly(catalog, ["$schema", "version", "vocabulary", "defaults", "presets"], "top level");
   if (catalog.$schema !== STAFFING_CATALOG_SCHEMA_ID)
-    throw new Error(`staffing catalog: $schema must be ${STAFFING_CATALOG_SCHEMA_ID}`);
+    throw new Error(`agent-run template catalog: $schema must be ${STAFFING_CATALOG_SCHEMA_ID}`);
   const vocabulary = catalog?.vocabulary;
   const axes = ["taskGrades", "semanticTiers", "deliberations", "topologies", "postures", "capabilities"];
   keysOnly(vocabulary, axes, "vocabulary");
   for (const axis of axes) {
     const values = vocabulary?.[axis];
     if (!Array.isArray(values) || !values.length || values.some((value) => typeof value !== "string" || !value))
-      throw new Error(`staffing catalog: vocabulary.${axis} must contain non-empty strings`);
-    if (new Set(values).size !== values.length) throw new Error(`staffing catalog: duplicate vocabulary.${axis}`);
+      throw new Error(`agent-run template catalog: vocabulary.${axis} must contain non-empty strings`);
+    if (new Set(values).size !== values.length) throw new Error(`agent-run template catalog: duplicate vocabulary.${axis}`);
   }
   keysOnly(catalog.defaults, ["taskGrade", "tier", "deliberation", "topology", "posture"], "defaults");
   for (const [field, axis] of [["taskGrade", "taskGrades"], ["tier", "semanticTiers"], ["deliberation", "deliberations"], ["topology", "topologies"], ["posture", "postures"]])
-    if (!vocabulary[axis].includes(catalog.defaults?.[field])) throw new Error(`staffing catalog: invalid defaults.${field}`);
-  if (!Array.isArray(catalog.presets) || !catalog.presets.length) throw new Error("staffing catalog: presets must be non-empty");
+    if (!vocabulary[axis].includes(catalog.defaults?.[field])) throw new Error(`agent-run template catalog: invalid defaults.${field}`);
+  if (!Array.isArray(catalog.presets) || !catalog.presets.length) throw new Error("agent-run template catalog: presets must be non-empty");
   const names = new Set();
   for (const preset of catalog.presets) {
     keysOnly(preset, ["name", "taskGrade", "tier", "deliberation", "topology", "posture", "capabilities", "tagline", "description"], `preset ${preset?.name ?? "<unknown>"}`);
-    canonicalRoleId(preset?.name, "staffing catalog preset name");
-    if (names.has(preset.name)) throw new Error(`staffing catalog: duplicate preset name ${preset.name}`);
+    canonicalRoleId(preset?.name, "agent-run template catalog preset name");
+    if (names.has(preset.name)) throw new Error(`agent-run template catalog: duplicate preset name ${preset.name}`);
     names.add(preset.name);
     for (const [field, axis] of [
       ["taskGrade", "taskGrades"], ["tier", "semanticTiers"], ["deliberation", "deliberations"],

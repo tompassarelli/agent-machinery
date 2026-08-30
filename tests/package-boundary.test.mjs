@@ -40,7 +40,7 @@ test("package manifest permits only exact typed-authoring commands", () => {
 
 test("export manifest is a closed provider-neutral package", () => {
   const result = validatePackage();
-  assert.equal(result.units, 29);
+  assert.equal(result.units, 30);
   assert.equal(result.templates, 16);
 });
 

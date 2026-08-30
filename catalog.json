@@ -7,7 +7,8 @@
     "license": "MIT OR Apache-2.0"
   },
   "units": [
-    {"id":"agent-machinery","kind":"module","source":"catalog.json","members":["work-ownership-distilled","agent-run-design-distilled","agent-practice"]},
+    {"id":"agent-machinery","kind":"module","source":"catalog.json","members":["delegation","agent-practice"]},
+    {"id":"delegation","kind":"module","source":"catalog.json","members":["work-ownership-distilled","agent-run-design-distilled"]},
     {"id":"agent-practice","kind":"module","source":"catalog.json","members":["build-vs-reuse-distilled","external-code-distilled","greenfield-distilled","planning-distilled","prior-art-distilled","production-hardening-distilled","program-craftsmanship-distilled","program-stewardship-distilled","rust-development-distilled","skill-maintenance-distilled","terse-distilled","verification-distilled"]},
     {"id":"work-ownership-distilled","kind":"skill","source":"skills/work-ownership-distilled/SKILL.md"},
     {"id":"agent-run-design-distilled","kind":"skill","source":"skills/agent-run-design-distilled/SKILL.md"},

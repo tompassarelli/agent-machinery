@@ -1,12 +1,17 @@
 ---
 name: agent-run-design-distilled
 description: >-
-  Design a provider-independent agent run from a role, portable execution
-  requirements, and a stock or bespoke composition. Use before a concrete run
-  is admitted, including when no stock template fits.
+  Design the provider-independent run side of delegation from a role, portable
+  execution requirements, and a stock or bespoke composition. Use before a
+  concrete run is admitted, including when no stock template fits.
 ---
 
 # Agent run design
+
+Delegation has two separate seams. `work-ownership-v1` determines which
+intentional actor owns a piece of work; run design determines the portable
+contract for a run that may accept it. Choosing a role, template, or provider
+does not transfer ownership.
 
 Read `agent-machinery:doctrine.md`, `agent-machinery:staffing/catalog.json`,
 and `agent-machinery:docs/routing.md`. Resolve `project-exposure-v1`, classify
