@@ -63,6 +63,30 @@ owns accounts, leases, connectivity, dispatch, raw telemetry, recurrence, live
 coordination, and settlement. A changed inventory is resolved again through
 the same function; it does not authorize a second fallback table.
 
+The selection catalog defines a hard quality and success floor before any
+price, latency, token, rework, or intervention objective is considered. Arms
+remain on catalog priors until observations meet the configured confidence
+threshold; a measured failure may exclude an automatic arm, but cost pressure
+never lowers `capabilityFloor`. Economy and fast service classes compare
+expected price or latency per quality-passing result only among eligible arms.
+
+Bounded exploration is an optional sidecar to `resolveExecutionPlan`, never a
+tenth routing field. The consumer supplies the period's eligible and treatment
+counts, an episode identity, a minimum reasoning floor, and allowed efforts.
+Agent Machinery enforces the period share, model eligibility, live inventory,
+capability floor, effort distance, and deterministic assignment. An explicit
+model pin disables exploration; explicit-only models such as Terra are never
+automatic treatments. The plan records baseline, selected treatment, reason,
+and propensity while leaving the portable request unchanged.
+
+`summarizeSelectionEvidence` groups observations into daily or ISO-week periods
+and route strata. It retains quality and process confidence intervals, exact
+price and token-category coverage, expected price and duration per quality
+pass, rework, intervention, and missing-measurement counts. The consumer owns
+the recurrence clock and durable raw observations; it must feed
+the resulting evidence back into this same resolver instead of maintaining a
+second recommendation policy.
+
 Schema identities are stable and versioned independently of package paths:
 `urn:agent-machinery:schema:routing-request:v3` and
 `urn:agent-machinery:schema:selection-assessment:v2`. Resolve their packaged

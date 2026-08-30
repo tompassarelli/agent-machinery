@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:agent-machinery:schema:model-selection-catalog:v1",
+  "$id": "urn:agent-machinery:schema:model-selection-catalog:v2",
   "title": "Provider model and effort selection catalog",
   "type": "object",
   "additionalProperties": false,
-  "required": ["$schema", "version", "policyRevision", "qualityPolicy", "serviceObjectives", "providers"],
+  "required": ["$schema", "version", "policyRevision", "qualityPolicy", "explorationPolicy", "serviceObjectives", "providers"],
   "properties": {
-    "$schema": { "const": "urn:agent-machinery:schema:model-selection-catalog:v1" },
-    "version": { "const": 1 },
+    "$schema": { "const": "urn:agent-machinery:schema:model-selection-catalog:v2" },
+    "version": { "const": 2 },
     "policyRevision": { "type": "string", "minLength": 1 },
     "qualityPolicy": {
       "type": "object", "additionalProperties": false,
@@ -17,6 +17,16 @@
         "minimumSuccess": { "type": "number", "minimum": 0, "maximum": 1 },
         "minimumObservations": { "type": "integer", "minimum": 1 },
         "nicheMinimumObservations": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "explorationPolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["maximumShare", "minimumEligibleRuns", "maximumEffortDistance", "seed"],
+      "properties": {
+        "maximumShare": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "minimumEligibleRuns": { "type": "integer", "minimum": 1 },
+        "maximumEffortDistance": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "seed": { "$ref": "#/$defs/id" }
       }
     },
     "serviceObjectives": {
@@ -48,7 +58,7 @@
     "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]*$" },
     "objective": {
       "type": "array", "minItems": 1, "uniqueItems": true,
-      "items": { "enum": ["quality", "success", "latency", "price", "tokens", "catalogPrior"] }
+      "items": { "enum": ["quality", "success", "rework", "intervention", "latency", "price", "tokens", "pricePerQualityPass", "latencyPerQualityPass", "catalogPrior"] }
     },
     "model": {
       "type": "object", "additionalProperties": false,

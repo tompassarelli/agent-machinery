@@ -25,7 +25,9 @@ executes the returned ranked plan.
   `agent-machinery:docs/`. Generated provider-neutral templates live in
   `agent-machinery:agents/`.
 - `agent-machinery:selection/catalog.json` and `resolveExecutionPlan` are the
-  single authority for provider/model/effort eligibility and ranking.
+  single authority for provider/model/effort eligibility, quality-gated
+  ranking, and bounded model × effort exploration. `summarizeSelectionEvidence`
+  produces daily or weekly calibration periods without owning their schedule.
 
 ```sh
 bun test

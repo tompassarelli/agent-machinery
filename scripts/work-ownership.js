@@ -1,22 +1,24 @@
 
 const WORK__OWNERSHIP__VERSION = "work-ownership-v1";
+export { WORK__OWNERSHIP__VERSION as "WORK_OWNERSHIP_VERSION" };
 
 const WORK__OWNERSHIP__SCHEMA__ID = "urn:agent-machinery:schema:work-ownership:v1";
+export { WORK__OWNERSHIP__SCHEMA__ID as "WORK_OWNERSHIP_SCHEMA_ID" };
 
 function same_value_p(left, right) {
   return (left === right);
 }
 
 function actor_equal_p(left, right) {
-  return ((((_truthy) => _truthy !== false && _truthy != null)(((left == null) && (right == null)))) ? true : (((_truthy) => _truthy !== false && _truthy != null)(((left == null) || (right == null)))) ? false : (same_value_p(left.kind, right.kind) && same_value_p(left.id, right.id)));
+  return ((((left == null) && (right == null))) ? true : (((left == null) || (right == null))) ? false : (same_value_p(left.kind, right.kind) && same_value_p(left.id, right.id)));
 }
 
 function pending_offer_equal_p(left, right) {
-  return ((((_truthy) => _truthy !== false && _truthy != null)(((left == null) && (right == null)))) ? true : (((_truthy) => _truthy !== false && _truthy != null)(((left == null) || (right == null)))) ? false : (same_value_p(left.id, right.id) && (actor_equal_p(left.from, right.from) && actor_equal_p(left.to, right.to))));
+  return ((((left == null) && (right == null))) ? true : (((left == null) || (right == null))) ? false : (same_value_p(left.id, right.id) && actor_equal_p(left.from, right.from) && actor_equal_p(left.to, right.to)));
 }
 
 function state_equal_p(left, right) {
-  return (same_value_p(left.goal, right.goal) && (actor_equal_p(left.owner, right.owner) && (actor_equal_p(left.accountableParent, right.accountableParent) && pending_offer_equal_p(left.pendingOffer, right.pendingOffer))));
+  return (same_value_p(left.goal, right.goal) && actor_equal_p(left.owner, right.owner) && actor_equal_p(left.accountableParent, right.accountableParent) && pending_offer_equal_p(left.pendingOffer, right.pendingOffer));
 }
 
 function accepted_parent_p(before, after) {
@@ -69,7 +71,4 @@ function validate_work_ownership_transition_result(transition) {
   const kind = event.kind;
   return (((!same_value_p(transition.version, WORK__OWNERSHIP__VERSION))) ? reject("work ownership transition version must be work-ownership-v1") : ((!same_value_p(before.goal, after.goal))) ? reject("work ownership events must not change the goal") : (same_value_p(kind, "offer")) ? validate_offer(transition, before, event, after) : (same_value_p(kind, "accept")) ? validate_acceptance(transition, before, event, after) : (same_value_p(kind, "transfer")) ? validate_transfer(transition, before, event, after) : (same_value_p(kind, "refuse")) ? validate_refusal(transition, before, event, after) : (same_value_p(kind, "escalate")) ? validate_escalation(transition, before, event, after) : reject("unknown work ownership event"));
 }
-
-export { WORK__OWNERSHIP__SCHEMA__ID as "WORK_OWNERSHIP_SCHEMA_ID" };
-export { WORK__OWNERSHIP__VERSION as "WORK_OWNERSHIP_VERSION" };
 export { validate_work_ownership_transition_result as "validate-work-ownership-transition-result" };
